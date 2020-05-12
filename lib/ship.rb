@@ -9,7 +9,6 @@ class Ship
     @health = length
   end
 
-#deleted unless, since it was redundant
   def sunk?
     @health == 0
   end
