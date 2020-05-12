@@ -27,9 +27,9 @@ class ShipTest < Minitest::Test
   end
 
   def test_it_can_be_sunk
-    @cruiser.hit
-    @cruiser.hit
-    @cruiser.hit
+    3.times do @cruiser.hit
+    end
+    
     assert_equal true, @cruiser.sunk?
   end
 end
