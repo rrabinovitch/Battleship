@@ -28,4 +28,24 @@ class CellTest < Minitest::Test
     assert_equal @cruiser, @cell.ship
     assert_equal false, @cell.empty?
   end
+
+  def test_it_has_not_been_fired_upon_by_default
+    @cell.place_ship(@cruiser) #decide later whether necessary to keep
+
+    assert_equal false, @cell.fired_upon?
+  end
+
+  def test_it_knows_when_cell_has_been_fired_upon
+    @cell.place_ship(@cruiser)
+    @cell.fire_upon
+
+    assert_equal true, @cell.fired_upon?
+  end
+
+  def test_firing_upon_a_cell_decreases_ship_health
+    @cell.place_ship(@cruiser)
+    @cell.fire_upon
+
+    assert_equal 2, @cell.ship.health
+  end
 end
