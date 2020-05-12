@@ -21,4 +21,16 @@ class ShipTest < Minitest::Test
   def test_it_is_not_sunk_by_default
     refute @cruiser.sunk?
   end
+
+  def test_it_can_be_hit
+    assert_equal 2, @cruiser.hit
+  end
+
+  def test_it_can_be_sunk
+    @cruiser.hit
+    @cruiser.hit
+    @cruiser.hit
+    assert_equal true, @cruiser.sunk?
+  end
+
 end
