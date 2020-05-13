@@ -19,7 +19,7 @@ class CellTest < Minitest::Test
   end
 
   def test_it_starts_without_a_ship
-    assert_equal nil, @cell_1.ship
+    assert_nil @cell_1.ship
     assert_equal true, @cell_1.empty?
   end
 
@@ -50,21 +50,43 @@ class CellTest < Minitest::Test
     assert_equal 2, @cell_1.ship.health
   end
 
-  def test_it_can_be_rendered_when_no_ship
+  def test_it_can_be_rendered_when_no_ship_before_being_fired_upon
     assert_equal ".", @cell_1.render
   end
 
-  def test_it_can_be_rendered_with_ship
+  def test_it_can_be_rendered_as_a_miss_when_no_ship_after_being_fired_upon
+    @cell_1.fire_upon
+
+    assert_equal "M", @cell_1.render
+  end
+
+  def test_it_can_be_rendered_with_ship_after_being_fired_upon
     @cell_2.place_ship(@cruiser)
     @cell_2.fire_upon
 
     assert_equal "H", @cell_2.render
   end
 
-  def test_it_can_reveal_a_ship_without_being_hit
+  def test_it_can_render_a_ship_without_being_hit_when_passed_true_argument
     @cell_2.place_ship(@cruiser)
 
     assert_equal "S", @cell_2.render(true)
   end
 
+  def test_it_can_render_a_ship_when_sunk
+    @cell_2 = Cell.new("C3")
+    @cruiser = Ship.new("Cruiser", 3)
+    
+    @cell_2.place_ship(@cruiser)
+
+    @cruiser.hit
+    @cruiser.hit
+
+    assert_equal false, @cruiser.sunk?
+
+    @cruiser.hit
+
+    assert_equal true, @cruiser.sunk?
+    assert_equal "X", @cell_2.render
+  end
 end
