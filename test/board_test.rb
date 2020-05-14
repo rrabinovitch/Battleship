@@ -7,6 +7,8 @@ require './lib/board'
 class BoardTest < Minitest::Test
   def setup
     @board = Board.new
+    @cruiser = Ship.new("Cruiser", 3)
+    @submarine = Ship.new("Submarine", 2)
   end
 
   def test_it_exists
@@ -21,5 +23,9 @@ class BoardTest < Minitest::Test
     assert_equal false, @board.valid_coordinate?("A5")
     assert_equal false, @board.valid_coordinate?("E1")
     assert_equal false, @board.valid_coordinate?("A22")
+  end
+
+  def test_it_identifies_invalid_placement_when_coodinates_and_ship_length_are_not_equal
+    assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2"])
   end
 end

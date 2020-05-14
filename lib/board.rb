@@ -27,4 +27,8 @@ class Board
   def valid_coordinate?(coordinate)
     self.cells.key?(coordinate)
   end
+
+  def valid_placement?(ship, coordinates = [])
+    return false if ship.length != coordinates.count
+  end
 end
