@@ -1,6 +1,4 @@
 class Board
-
-
   def initialize
     @cells = {}
   end
@@ -24,5 +22,9 @@ class Board
       "D3" => Cell.new("D3"),
       "D4" => Cell.new("D4")
     }
+  end
+
+  def valid_coordinate?(coordinate)
+    return true if @cells.key?(coordinate)
   end
 end
