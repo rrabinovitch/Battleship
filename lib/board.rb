@@ -29,6 +29,10 @@ class Board
   end
 
   def valid_placement?(ship, coordinates = [])
-    return false if ship.length != coordinates.count
+    if ship.length != coordinates.count
+      false
+    elsif ship.length == coordinates.count
+      true
+    end
   end
 end

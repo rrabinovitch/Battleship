@@ -25,7 +25,21 @@ class BoardTest < Minitest::Test
     assert_equal false, @board.valid_coordinate?("A22")
   end
 
-  def test_it_identifies_invalid_placement_when_coodinates_and_ship_length_are_not_equal
+  def test_it_validates_placement_based_on_congruence_between_ship_length_and_number_of_coordinates
     assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2"])
+    assert_equal false, @board.valid_placement?(@submarine, ["A2", "A3", "A4"])
+    assert_equal true, @board.valid_placement?(@cruiser, ["A1", "A2", "A3"])
+    assert_equal true, @board.valid_placement?(@submarine, ["A2", "A3"])
+  end
+
+  def test_it_invalidates_placement_when_coordinates_are_not_consecutive
+    assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2", "A4"])
+    assert_equal false, @board.valid_placement?(@submarine, ["A1", "C1"])
+    assert_equal false, @board.valid_placement?(@cruiser, ["A3", "A2", "A1"])
+    assert_equal false, @board.valid_placement?(@submarine, ["C1", "B1"])
+    
+
+
+
   end
 end
