@@ -76,11 +76,10 @@ class CellTest < Minitest::Test
   def test_it_can_render_a_ship_when_sunk
     @cell_2.place_ship(@cruiser)
 
-    @cruiser.hit
     @cell_2.fire_upon
-
     assert_equal false, @cruiser.sunk?
 
+    @cruiser.hit
     @cruiser.hit
 
     assert_equal true, @cruiser.sunk?
