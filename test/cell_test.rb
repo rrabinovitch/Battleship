@@ -74,9 +74,6 @@ class CellTest < Minitest::Test
   end
 
   def test_it_can_render_a_ship_when_sunk
-    @cell_2 = Cell.new("C3")
-    @cruiser = Ship.new("Cruiser", 3)
-    
     @cell_2.place_ship(@cruiser)
 
     @cruiser.hit

@@ -22,17 +22,16 @@ class Cell
   def fire_upon
     @has_been_fired_upon = true
     @ship.hit if !empty?
-    # @ship.hit if @ship
   end
 
   def render(reveal_ship = false)
-    if @has_been_fired_upon && empty?
+    if empty? && fired_upon?
       "M"
-    elsif @has_been_fired_upon && !empty? && @ship.sunk?
+    elsif !empty? && @ship.sunk?
       "X"
-    elsif @has_been_fired_upon && !empty?
+    elsif !empty? && fired_upon?
       "H"
-    elsif reveal_ship == true && !@has_been_fired_upon && !empty?
+    elsif !empty? && !fired_upon? && reveal_ship == true
       "S"
     elsif !@has_been_fired_upon
       "."
