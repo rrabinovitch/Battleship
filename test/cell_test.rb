@@ -77,7 +77,7 @@ class CellTest < Minitest::Test
     @cell_2.place_ship(@cruiser)
 
     @cruiser.hit
-    @cruiser.hit
+    @cell_2.fire_upon
 
     assert_equal false, @cruiser.sunk?
 
