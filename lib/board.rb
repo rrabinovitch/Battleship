@@ -25,6 +25,6 @@ class Board
   end
 
   def valid_coordinate?(coordinate)
-    return true if @cells.key?(coordinate)
+    self.cells.key?(coordinate)
   end
 end
