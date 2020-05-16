@@ -20,11 +20,46 @@ class Board
     ship.length == coordinates.count
   end
 
-  def coordinates_consecutive?(coordinates)
+  # def coordinates_consecutive?(coordinates)
+  #   # letters ==> rows /// numbers ==> columns
+  #   coordinate_rows = coordinates.map do |coordinate|
+  #     coordinate[0]
+  #   end
+  #
+  #   coordinate_columns = coordinates.map do |coordinate|
+  #     coordinate[1]
+  #   end
+  #
+  #   coordinates.all? do |coordinate|
+  #     # checking if each coordinate's letter/row is the same as that of the first coordinate
+  #     # OR if each coordinate's number/column is the same as that of the first
+  #     if coordinates[0][0] == coordinate[0]
+  #       if
+  #     elsif coordinates[0][1] == coordinate[1]
+  #       true
+  #     else
+  #       false
+  #     end
+  #   end
+  # end
+
+  def coords_in_same_row?(coordinates)
+    coorindates.all? do |coordinate|
+      coordinates[0][0] == coordinate[0]
+    end
+    # coordinate_rows = coordinates.map do |coordinate|
+    #   coordinate[0]
+    # end
+    #
+    # coordinate_rows.all? do |row|
+    #   coordinate_rows[0] == row
+    # end
+  end
+
+
+  def coords_in_same_column?(coordinates)
     coordinates.all? do |coordinate|
-      # checking if letters of each coordinate's letter is the same as that of the first passed coordinate
-      # OR if each coordinate's number is the same as that of the first
-      coordinates[0][0] == coordinate[0] || coordinates[0][1] == coordinate[1]
+      coordinates[0][1] == coordinate[1]
     end
 
   end
@@ -44,3 +79,14 @@ end
     # if neither letters nor numbers are same, then invalid
     # if yes same letters, then check if numbers are consecutive
     # or if yes same numbers then check if letters are consecutive
+
+
+
+
+
+
+
+
+
+
+#
