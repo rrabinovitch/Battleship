@@ -39,7 +39,7 @@ class Board
     end
   end
 
-  def coordinate_columns # array of coordinate number values
+  def coordinate_columns(coordinates) # array of coordinate number values
     split_coordinates(coordinates).map do |coordinate|
       coordinate[1].to_i
     end
@@ -58,14 +58,14 @@ class Board
       row.ord
     end
     ordinal_rows.each_cons(2).all? do |a, b|
-      a == b + 1
+      b == a + 1
     end
   end
 
   def coordinates_in_consecutive_columns?(coordinates) # check if all coordinates' numbers are consecutive
     columns = coordinate_columns(coordinates)
     columns.each_cons(2).all? do |a, b|
-      a == b + 1
+      b == a + 1
     end
   end
 
@@ -80,28 +80,10 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    if coordinates_and_ship_length_same_num? && coordinates_consecutive?
+    if coordinates_and_ship_length_same_num?(ship, coordinates) && coordinates_consecutive?(coordinates)
       true
     else
       false
     end
   end
 end
-
-
-### first determining whether coordinate #s == length of ship
-### then whether either the coordinates have same letter or same number
-    ### if neither letters nor numbers are same, then invalid
-    ### if yes same letters, then check if numbers are consecutive
-    ### or if yes same numbers then check if letters are consecutive
-
-
-
-
-# coords = ["A1", "A2", "A3"]
-
-
-
-
-
-#
