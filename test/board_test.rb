@@ -140,20 +140,14 @@ class BoardTest < Minitest::Test
     assert_equal @cruiser, cell_3.ship
     assert_equal false, @board.valid_placement?(@submarine, ["A1", "B1"])
   end
-end
 
-  # def test_it_can_render_board
-  #   expected = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
-  #
-  #   cell_1 = @board.cells["A1"]
-  #   cell_2 = @board.cells["A2"]
-  #   cell_3 = @board.cells["A3"]
-  #   cell_4 = @board.cells["A4"]
-  #   cell_5 = @board.cells["B4"]
-  #   @board.place(@submarine, ["A4", "B4"])
-  #   @board.place(@cruiser, ["A1", "A2", "A3"])
-  #   cell_1.fire_upon
-  #   cell_4.fire_upon
-  #   cell_5.fire_upon
-  #   assert_equal expected, @board.render(true)
-  # end
+  def test_it_can_render_default
+    cell_1 = @board.cells["A1"]
+    cell_2 = @board.cells["A2"]
+    cell_3 = @board.cells["A3"]
+
+    assert_equal ".", cell_1.render
+    assert_equal ".", cell_2.render
+    assert_equal ".", cell_3.render
+  end
+end
