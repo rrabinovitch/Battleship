@@ -7,8 +7,8 @@ class Cell
     @has_been_fired_upon = false
   end
 
-  def place_ship(ship)
-    @ship = ship
+  def place_ship(given_ship)
+    @ship = given_ship
   end
 
   def empty?
