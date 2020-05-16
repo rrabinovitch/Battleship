@@ -164,7 +164,7 @@ class BoardTest < Minitest::Test
     assert_equal ".", cell_4.render(true)
   end
 
-    def test_it_can_render_hits_and_misses
+  def test_it_can_render_hits_and_misses
     @board.place(@cruiser, ["A1", "A2", "A3"])
     cell_1 = @board.cells["A1"]
     cell_2 = @board.cells["A2"]
@@ -176,5 +176,26 @@ class BoardTest < Minitest::Test
     assert_equal ".", cell_1.render
     assert_equal "H", cell_2.render
     assert_equal "M", cell_4.render
+  end
+
+  def test_it_can_render_sunken_ships
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    cell_1 = @board.cells["A1"]
+    cell_2 = @board.cells["A2"]
+    cell_3 = @board.cells["A3"]
+
+    cell_1.fire_upon
+    assert_equal "H", cell_1.render
+    assert_equal ".", cell_2.render
+    assert_equal "S", cell_2.render(true)
+
+    cell_2.fire_upon
+    assert_equal "H", cell_2.render
+
+    cell_3.fire_upon
+
+    assert_equal "X", cell_1.render
+    assert_equal "X", cell_2.render
+    assert_equal "X", cell_3.render
   end
 end

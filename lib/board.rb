@@ -104,7 +104,7 @@ class Board
     end
   end
 
-  def render(visible = false) #Rendering the board. Is there an easier way to do this?
+  def render(visible = false)
     if visible == false
       "  1 2 3 4 \n" +
       "A #{@cells["A1"].render} #{@cells["A2"].render} #{@cells["A3"].render} #{@cells["A4"].render} \n" +
