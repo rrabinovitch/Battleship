@@ -101,6 +101,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_coordinates_cant_be_diagonal
+
     assert_equal false, @board.valid_placement?(@cruiser, ["A1", "B2", "C3"])
     assert_equal false, @board.valid_placement?(@submarine, ["C2", "D3"])
   end
@@ -108,5 +109,9 @@ class BoardTest < Minitest::Test
   def test_it_can_use_all_criteria_to_validate_placement
     assert_equal true, @board.valid_placement?(@submarine, ["A1", "A2"])
     assert_equal true, @board.valid_placement?(@cruiser, ["B1", "C1", "D1"])
+  end
+
+  def test_ships_occupy_multiple_cells #jonathan
+
   end
 end
