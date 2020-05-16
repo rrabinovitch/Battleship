@@ -41,4 +41,6 @@ class BoardTest < Minitest::Test
 
     #add assert_trues here too
   end
+
+  #make sure to test all helper methods
 end

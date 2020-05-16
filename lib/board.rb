@@ -16,7 +16,7 @@ class Board
     self.cells.key?(coordinate)
   end
 
-  def coordinate_and_ship_length_same?(ship, coordinates)
+  def coordinates_and_ship_length_same_num?(ship, coordinates)
     ship.length == coordinates.count
   end
 
@@ -26,30 +26,61 @@ class Board
     end
   end
 
-  def coords_in_same_row?(coordinates) # coord letters
-    coorindates.all? do |coordinate|
-      coordinates[0][0] == coordinate[0]
+  def coordinate_rows(coordinates) # array of coordinate letter values
+    split_coordinates(coordinates).map do |coordinate|
+      coordinate[0]
     end
   end
 
-  def coords_in_same_column?(coordinates) # coord numbers
-    coordinates.all? do |coordinate|
-      coordinates[0][1] == coordinate[1]
+  def coordinates_in_same_row?(coordinates) # check if all coordinates' letters are same
+    rows = coordinate_rows(coordinates)
+    rows.all? do |row|
+      rows[0] == row
+    end
+  end
+
+  def coordinate_columns # array of coordinate number values
+    split_coordinates(coordinates).map do |coordinate|
+      coordinate[1].to_i
+    end
+  end
+
+  def coordinates_in_same_column?(coordinates) # check if all coordinates' numbers are same
+    columns = coordinate_columns(coordinates)
+    columns.all? do |column|
+      column[0] == column
+    end
+  end
+
+  def coordinates_in_consecutive_rows?(coordinates) # check if all coordinates' letters are consecutive
+    rows = coordinate_rows(coordinates)
+    ordinal_rows = rows.map do |row|
+      row.ord
+    end
+    ordinal_rows.each_cons(2).all? do |a, b|
+      a == b + 1
+    end
+  end
+
+  def coordinates_in_consecutive_columns?(coordinates) # check if all coordinates' numbers are consecutive
+    columns = coordinate_columns(coordinates)
+    columns.each_cons(2).all? do |a, b|
+      a == b + 1
     end
   end
 
   def coordinates_consecutive?(coordinates)
-    if coords_in_same_row?(coordinates) # all coords have same letter
-
-    elsif coords_in_same_column?(coordinates) # all coords have same number
-    #  true
+    if coordinates_in_same_row?(coordinates) && coordinates_in_consecutive_columns?(coordinates)
+      true
+    elsif coordinates_in_same_column?(coordinates) && coordinates_in_consecutive_rows?(coordinates)
+     true
     else
       false
     end
   end
 
   def valid_placement?(ship, coordinates)
-    if coordinate_and_ship_length_same? && coordinates_consecutive?
+    if coordinates_and_ship_length_same_num? && coordinates_consecutive?
       true
     else
       false
@@ -61,8 +92,8 @@ end
 ### first determining whether coordinate #s == length of ship
 ### then whether either the coordinates have same letter or same number
     ### if neither letters nor numbers are same, then invalid
-    # if yes same letters, then check if numbers are consecutive
-    # or if yes same numbers then check if letters are consecutive
+    ### if yes same letters, then check if numbers are consecutive
+    ### or if yes same numbers then check if letters are consecutive
 
 
 
