@@ -150,4 +150,17 @@ class BoardTest < Minitest::Test
     assert_equal ".", cell_2.render
     assert_equal ".", cell_3.render
   end
+
+  def test_it_can_render_ship_visible
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    cell_1 = @board.cells["A1"]
+    cell_2 = @board.cells["A2"]
+    cell_3 = @board.cells["A3"]
+    cell_4 = @board.cells["A4"]
+
+    assert_equal "S", cell_1.render(true)
+    assert_equal "S", cell_2.render(true)
+    assert_equal "S", cell_3.render(true)
+    assert_equal ".", cell_4.render(true)
+  end
 end
