@@ -131,6 +131,7 @@ class BoardTest < Minitest::Test
     assert_equal @cruiser, cell_1.ship
     assert_equal @cruiser, cell_2.ship
     assert_equal @cruiser, cell_3.ship
+    assert cell_1.ship == cell_2.ship
   end
 
   def test_if_all_cells_are_empty
