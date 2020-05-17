@@ -15,6 +15,7 @@ class BoardTest < Minitest::Test
     assert_instance_of Hash, @board.cells
     assert_equal 16, @board.cells.count
     assert_instance_of Cell, @board.cells.values.first
+    assert_instance_of Board, @board 
   end
 
   def test_it_can_validate_presence_of_coordinate_on_board
