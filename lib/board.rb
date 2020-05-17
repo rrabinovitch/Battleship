@@ -106,8 +106,8 @@ class Board
     end
   end
 
-  def render(visible = false)
-    if visible == false
+  def render(reveal_ship = false)
+    if reveal_ship == false
       "  1 2 3 4 \n" +
       "A #{@cells["A1"].render} #{@cells["A2"].render} #{@cells["A3"].render} #{@cells["A4"].render} \n" +
       "B #{@cells["B1"].render} #{@cells["B2"].render} #{@cells["B3"].render} #{@cells["B4"].render} \n" +
