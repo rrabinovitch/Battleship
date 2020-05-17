@@ -25,16 +25,18 @@ class BoardTest < Minitest::Test
   def test_it_can_validate_presence_of_coordinate_on_board
     assert_equal true, @board.valid_coordinate?("A1")
     assert_equal true, @board.valid_coordinate?("D4")
+    
     assert_equal false, @board.valid_coordinate?("A5")
     assert_equal false, @board.valid_coordinate?("E1")
     assert_equal false, @board.valid_coordinate?("A22")
   end
 
   def test_it_evaluates_congruence_between_ship_length_and_number_of_coordinates
-    assert_equal false, @board.coordinates_and_ship_length_same_num?(@cruiser, ["A1", "A2"])
-    assert_equal false, @board.coordinates_and_ship_length_same_num?(@submarine, ["A2", "A3", "A4"])
     assert_equal true, @board.coordinates_and_ship_length_same_num?(@cruiser, ["A1", "A2", "A3"])
     assert_equal true, @board.coordinates_and_ship_length_same_num?(@submarine, ["A2", "A3"])
+    
+    assert_equal false, @board.coordinates_and_ship_length_same_num?(@cruiser, ["A1", "A2"])
+    assert_equal false, @board.coordinates_and_ship_length_same_num?(@submarine, ["A2", "A3", "A4"])
   end
 
   def test_it_can_split_coordinates
@@ -48,8 +50,9 @@ class BoardTest < Minitest::Test
 
   def test_it_can_identify_whether_coordinates_are_in_same_row
     assert_equal true, @board.coordinates_in_same_row?(["A1", "A2", "A3"])
-    assert_equal false, @board.coordinates_in_same_row?(["A1", "B1", "C1"])
     assert_equal true, @board.coordinates_in_same_row?(["A3", "A2", "A1"])
+    
+    assert_equal false, @board.coordinates_in_same_row?(["A1", "B1", "C1"])
   end
 
   def test_it_can_identify_columns_of_a_set_of_coordinates
@@ -59,19 +62,22 @@ class BoardTest < Minitest::Test
   end
 
   def test_it_can_identify_whether_coordinates_are_in_same_column
-    assert_equal false, @board.coordinates_in_same_column?(["A1", "A2", "A3"])
     assert_equal true, @board.coordinates_in_same_column?(["A1", "B1", "C1"])
-    assert_equal false, @board.coordinates_in_same_column?(["A3", "A2", "A1"])
+    assert_equal true, @board.coordinates_in_same_row?(["A3", "A2", "A1"])
+    
+    assert_equal false, @board.coordinates_in_same_column?(["A1", "A2", "A3"])
   end
 
   def test_it_can_identify_whether_coordinates_are_in_consecutive_rows
-    assert_equal false, @board.coordinates_in_consecutive_rows?(["A1", "A2", "A3"])
     assert_equal true, @board.coordinates_in_consecutive_rows?(["A1", "B1", "C1"])
+    
+    assert_equal false, @board.coordinates_in_consecutive_rows?(["A1", "A2", "A3"])
     assert_equal false, @board.coordinates_in_consecutive_rows?(["A3", "A2", "A1"])
   end
 
   def test_it_can_identify_whether_coordinates_are_in_consecutive_columns
     assert_equal true, @board.coordinates_in_consecutive_columns?(["A1", "A2", "A3"])
+    
     assert_equal false, @board.coordinates_in_consecutive_columns?(["A1", "B1", "C1"])
     assert_equal false, @board.coordinates_in_consecutive_columns?(["A3", "A2", "A1"])
   end
@@ -79,6 +85,7 @@ class BoardTest < Minitest::Test
   def test_it_can_identify_whether_coordinates_are_consecutive
     assert_equal true, @board.coordinates_consecutive?(["A1", "A2", "A3"])
     assert_equal true, @board.coordinates_consecutive?(["A1", "B1", "C1"])
+    
     assert_equal false, @board.coordinates_consecutive?(["A1", "A2", "A4"])
     assert_equal false, @board.coordinates_consecutive?(["A1", "C1"])
     assert_equal false, @board.coordinates_consecutive?(["A3", "A2", "A1"])
@@ -86,23 +93,23 @@ class BoardTest < Minitest::Test
   end
 
   def test_coordinates_must_be_same_length_as_ship
-    assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2"])
-    assert_equal false, @board.valid_placement?(@submarine, ["A2", "A3", "A4"])
-
     assert_equal true, @board.valid_placement?(@cruiser, ["A1", "A2", "A3"])
     assert_equal true, @board.valid_placement?(@submarine, ["A2", "A3"])
+    
+    assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2"])
+    assert_equal false, @board.valid_placement?(@submarine, ["A2", "A3", "A4"])
   end
 
   def test_coordinates_must_be_consecutive
-    assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2", "A4"])
-    assert_equal false, @board.valid_placement?(@submarine, ["A1", "C1"])
-    assert_equal false, @board.valid_placement?(@cruiser, ["A3", "A2", "A1"])
-    assert_equal false, @board.valid_placement?(@submarine, ["C1", "B1"])
-
     assert_equal true, @board.valid_placement?(@cruiser, ["A1", "A2", "A3"])
     assert_equal true, @board.valid_placement?(@cruiser, ["A1", "B1", "C1"])
     assert_equal true, @board.valid_placement?(@submarine, ["C1", "D1"])
     assert_equal true, @board.valid_placement?(@submarine, ["D1", "D2"])
+    
+    assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2", "A4"])
+    assert_equal false, @board.valid_placement?(@submarine, ["A1", "C1"])
+    assert_equal false, @board.valid_placement?(@cruiser, ["A3", "A2", "A1"])
+    assert_equal false, @board.valid_placement?(@submarine, ["C1", "B1"])
   end
 
   def test_coordinates_cant_be_diagonal
