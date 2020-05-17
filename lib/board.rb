@@ -89,7 +89,7 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    if coordinates_and_ship_length_same_num?(ship, coordinates) && coordinates_consecutive?(coordinates) && cell_has_no_ships?(coordinates) == true
+    if coordinates_and_ship_length_same_num?(ship, coordinates) && coordinates_consecutive?(coordinates) && cell_has_no_ships?(coordinates)
       true
     else
       false
