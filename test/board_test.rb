@@ -14,9 +14,9 @@ class BoardTest < Minitest::Test
   def test_it_exists
     assert_instance_of Hash, @board.cells
     assert_instance_of Cell, @board.cells.values.first
-    assert_instance_of Board, @board 
+    assert_instance_of Board, @board
   end
-  
+
   def test_it_has_cells
     assert_equal 16, @board.cells.count
     assert_instance_of Cell, @board.cells["A1"]
@@ -25,7 +25,7 @@ class BoardTest < Minitest::Test
   def test_it_can_validate_presence_of_coordinate_on_board
     assert_equal true, @board.valid_coordinate?("A1")
     assert_equal true, @board.valid_coordinate?("D4")
-    
+
     assert_equal false, @board.valid_coordinate?("A5")
     assert_equal false, @board.valid_coordinate?("E1")
     assert_equal false, @board.valid_coordinate?("A22")
@@ -34,7 +34,7 @@ class BoardTest < Minitest::Test
   def test_it_evaluates_congruence_between_ship_length_and_number_of_coordinates
     assert_equal true, @board.coordinates_and_ship_length_same_num?(@cruiser, ["A1", "A2", "A3"])
     assert_equal true, @board.coordinates_and_ship_length_same_num?(@submarine, ["A2", "A3"])
-    
+
     assert_equal false, @board.coordinates_and_ship_length_same_num?(@cruiser, ["A1", "A2"])
     assert_equal false, @board.coordinates_and_ship_length_same_num?(@submarine, ["A2", "A3", "A4"])
   end
@@ -51,7 +51,7 @@ class BoardTest < Minitest::Test
   def test_it_can_identify_whether_coordinates_are_in_same_row
     assert_equal true, @board.coordinates_in_same_row?(["A1", "A2", "A3"])
     assert_equal true, @board.coordinates_in_same_row?(["A3", "A2", "A1"])
-    
+
     assert_equal false, @board.coordinates_in_same_row?(["A1", "B1", "C1"])
   end
 
@@ -64,20 +64,20 @@ class BoardTest < Minitest::Test
   def test_it_can_identify_whether_coordinates_are_in_same_column
     assert_equal true, @board.coordinates_in_same_column?(["A1", "B1", "C1"])
     assert_equal true, @board.coordinates_in_same_row?(["A3", "A2", "A1"])
-    
+
     assert_equal false, @board.coordinates_in_same_column?(["A1", "A2", "A3"])
   end
 
   def test_it_can_identify_whether_coordinates_are_in_consecutive_rows
     assert_equal true, @board.coordinates_in_consecutive_rows?(["A1", "B1", "C1"])
-    
+
     assert_equal false, @board.coordinates_in_consecutive_rows?(["A1", "A2", "A3"])
     assert_equal false, @board.coordinates_in_consecutive_rows?(["A3", "A2", "A1"])
   end
 
   def test_it_can_identify_whether_coordinates_are_in_consecutive_columns
     assert_equal true, @board.coordinates_in_consecutive_columns?(["A1", "A2", "A3"])
-    
+
     assert_equal false, @board.coordinates_in_consecutive_columns?(["A1", "B1", "C1"])
     assert_equal false, @board.coordinates_in_consecutive_columns?(["A3", "A2", "A1"])
   end
@@ -85,7 +85,7 @@ class BoardTest < Minitest::Test
   def test_it_can_identify_whether_coordinates_are_consecutive
     assert_equal true, @board.coordinates_consecutive?(["A1", "A2", "A3"])
     assert_equal true, @board.coordinates_consecutive?(["A1", "B1", "C1"])
-    
+
     assert_equal false, @board.coordinates_consecutive?(["A1", "A2", "A4"])
     assert_equal false, @board.coordinates_consecutive?(["A1", "C1"])
     assert_equal false, @board.coordinates_consecutive?(["A3", "A2", "A1"])
@@ -95,7 +95,7 @@ class BoardTest < Minitest::Test
   def test_coordinates_must_be_same_length_as_ship
     assert_equal true, @board.valid_placement?(@cruiser, ["A1", "A2", "A3"])
     assert_equal true, @board.valid_placement?(@submarine, ["A2", "A3"])
-    
+
     assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2"])
     assert_equal false, @board.valid_placement?(@submarine, ["A2", "A3", "A4"])
   end
@@ -105,7 +105,7 @@ class BoardTest < Minitest::Test
     assert_equal true, @board.valid_placement?(@cruiser, ["A1", "B1", "C1"])
     assert_equal true, @board.valid_placement?(@submarine, ["C1", "D1"])
     assert_equal true, @board.valid_placement?(@submarine, ["D1", "D2"])
-    
+
     assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2", "A4"])
     assert_equal false, @board.valid_placement?(@submarine, ["A1", "C1"])
     assert_equal false, @board.valid_placement?(@cruiser, ["A3", "A2", "A1"])
@@ -154,60 +154,55 @@ class BoardTest < Minitest::Test
   end
 
   def test_it_can_render_default
-    cell_1 = @board.cells["A1"]
-    cell_2 = @board.cells["A2"]
-    cell_3 = @board.cells["A3"]
+    default_board = "  1 2 3 4 \n" +
+                    "A . . . . \n" +
+                    "B . . . . \n" +
+                    "C . . . . \n" +
+                    "D . . . . \n"
 
-    assert_equal ".", cell_1.render
-    assert_equal ".", cell_2.render
-    assert_equal ".", cell_3.render
+    assert_equal default_board, @board.render
   end
 
-  def test_it_can_render_reveal_ship
+  def test_it_can_render_reveal_ship_without_being_hit
     @board.place(@cruiser, ["A1", "A2", "A3"])
-    cell_1 = @board.cells["A1"]
-    cell_2 = @board.cells["A2"]
-    cell_3 = @board.cells["A3"]
-    cell_4 = @board.cells["A4"]
 
-    assert_equal "S", cell_1.render(true)
-    assert_equal "S", cell_2.render(true)
-    assert_equal "S", cell_3.render(true)
-    assert_equal ".", cell_4.render(true)
+    revealed_board = "  1 2 3 4 \n" +
+                    "A S S S . \n" +
+                    "B . . . . \n" +
+                    "C . . . . \n" +
+                    "D . . . . \n"
+
+    assert_equal revealed_board, @board.render(true)
   end
 
   def test_it_can_render_hits_and_misses
-    @board.place(@cruiser, ["A1", "A2", "A3"])
-    cell_1 = @board.cells["A1"]
-    cell_2 = @board.cells["A2"]
-    cell_3 = @board.cells["A3"]
-    cell_4 = @board.cells["A4"]
-    cell_2.fire_upon
-    cell_4.fire_upon
 
-    assert_equal ".", cell_1.render
-    assert_equal "H", cell_2.render
-    assert_equal "M", cell_4.render
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    @board.cells["A1"].fire_upon
+    @board.cells["B1"].fire_upon
+
+    fired_at_board = "  1 2 3 4 \n" +
+                    "A H . . . \n" +
+                    "B M . . . \n" +
+                    "C . . . . \n" +
+                    "D . . . . \n"
+
+    assert_equal fired_at_board, @board.render
   end
 
   def test_it_can_render_sunken_ships
     @board.place(@cruiser, ["A1", "A2", "A3"])
-    cell_1 = @board.cells["A1"]
-    cell_2 = @board.cells["A2"]
-    cell_3 = @board.cells["A3"]
+    @board.cells["A1"].fire_upon
+    @board.cells["B1"].fire_upon
+    @board.cells["A2"].fire_upon
+    @board.cells["A3"].fire_upon
 
-    cell_1.fire_upon
-    assert_equal "H", cell_1.render
-    assert_equal ".", cell_2.render
-    assert_equal "S", cell_2.render(true)
+    sunken_ship_board =  "  1 2 3 4 \n" +
+                        "A X X X . \n" +
+                        "B M . . . \n" +
+                        "C . . . . \n" +
+                        "D . . . . \n"
 
-    cell_2.fire_upon
-    assert_equal "H", cell_2.render
-
-    cell_3.fire_upon
-
-    assert_equal "X", cell_1.render
-    assert_equal "X", cell_2.render
-    assert_equal "X", cell_3.render
+    assert_equal sunken_ship_board, @board.render
   end
 end
