@@ -151,7 +151,7 @@ class BoardTest < Minitest::Test
     assert_equal ".", cell_3.render
   end
 
-  def test_it_can_render_ship_visible
+  def test_it_can_render_reveal_ship
     @board.place(@cruiser, ["A1", "A2", "A3"])
     cell_1 = @board.cells["A1"]
     cell_2 = @board.cells["A2"]
