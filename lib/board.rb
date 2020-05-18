@@ -99,8 +99,8 @@ class Board
   def place(ship, coordinates)
     if valid_placement?(ship, coordinates)
       coordinates.each do |coordinate|
-      if @cells[coordinate].empty?
-      @cells[coordinate].place_ship(ship)
+        if @cells[coordinate].empty?
+        @cells[coordinate].place_ship(ship)
       end
       end
     end
