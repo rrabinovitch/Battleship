@@ -26,10 +26,15 @@ class Game
   end
 
   def start_game
-
+    # create a new turn
+    # prompt user to input cell to fire at: choose a cell
+      # user_input = gets.chomp
+    # player_fires_at(user_input)
   end
 
   def end_game
 
   end
+
+
 end
