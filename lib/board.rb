@@ -101,7 +101,7 @@ class Board
       coordinates.each do |coordinate|
         if @cells[coordinate].empty?
         @cells[coordinate].place_ship(ship)
-      end
+        end
       end
     end
   end
