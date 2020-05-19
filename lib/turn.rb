@@ -23,10 +23,17 @@ class Turn
     @human_board.cells[random_cell].fire_upon
   end
 
-  def display_results
-    p "=============COMPUTER BOARD============= \n" +
-    "#{@computer_board.render} \n" +
+  def display_computer_board
+    "=============COMPUTER BOARD============= \n" +
+    "#{@computer_board.render} \n"
+  end
+
+  def display_human_board
     "==============PLAYER BOARD============== \n" +
-    "#{@human_board.render}"
+    "#{@human_board.render} \n"
+  end
+
+  def display_turn_results
+    p "#{display_computer_board} + #{display_human_board}"
   end
 end

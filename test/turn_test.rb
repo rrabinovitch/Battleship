@@ -93,8 +93,6 @@ class TurnTest < Minitest::Test
     assert_equal false, @turn.computer_board.cells.include?(@computer_board.cells["A4"])
     assert_equal false, @turn.computer_board.cells.include?(@computer_board.cells["D1"])
     assert_equal false, @turn.computer_board.cells.include?(@computer_board.cells["D2"])
-
-    # add assertions for computer's board after human fires a few times
   end
 
   def test_computer_can_fire_at_human_board
@@ -116,11 +114,12 @@ class TurnTest < Minitest::Test
     @turn.human_fires_at_computer("D1")
     @turn.human_fires_at_computer("D2")
 
-
     @turn.computer_fires_at_user("A1")
     @turn.computer_fires_at_user("B3")
     @turn.computer_fires_at_user("C1")
     @turn.computer_fires_at_user("C2")
+
+    require "pry"; binding.pry
 
     display = "=============COMPUTER BOARD============= \n" +
               "  1 2 3 4 \n" +
@@ -134,6 +133,30 @@ class TurnTest < Minitest::Test
               "B . . M . \n" +
               "C X X . . \n" +
               "D . . . . \n"
-    assert_equal display, @turn.display_results
+
+
+    assert_equal display, @turn.display_turn_results
   end
 end
+
+
+
+# "=============COMPUTER BOARD============= \n
+#     1 2 3 4 \n
+#   A . . . M \n
+#   B H . . . \n
+#   C . . . . \n
+#   D X X . . \n
+#   ==============PLAYER BOARD============== \n
+#     1 2 3 4 \n
+#   A H . . . \n
+#   B . . M . \n
+#   C X X . . \n
+#   D . . . . \n"
+#
+# "==============PLAYER BOARD============== \n
+#   1 2 3 4 \n
+# A H . . . \n
+# B . . M . \n
+# C X X . . \n
+# D . . . . \n \n"
