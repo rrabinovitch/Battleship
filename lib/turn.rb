@@ -15,8 +15,15 @@ class Turn
     end
   end
 
-  def computer_fires_at_user
-    random_cell = @human_board.cells.keys.sample
+  def computer_random_cell_selection
+    @human_board.cells.keys.sample
+  end
+
+  def computer_fires_at_user(random_cell)
     @human_board.cells[random_cell].fire_upon
+  end
+
+  def display_results
+
   end
 end

@@ -108,6 +108,16 @@ class TurnTest < Minitest::Test
   end
 
   def test_it_can_display_results
-    
+    @turn.human_fires_at_computer("A4")
+    @turn.human_fires_at_computer("D1")
+    @turn.human_fires_at_computer("D2")
+
+    @turn.computer_fires_at_user
+    assert_equal 15, @turn.human_board.remaining_cells.count
+
+    5.times do
+      @turn.computer_fires_at_user
+    end
+    assert_equal 10, @turn.human_board.remaining_cells.count
   end
 end
