@@ -8,7 +8,7 @@ class Turn
   end
 
   def player_fires_at(user_input)
-    p "Choose a coordinate for your shot."
+
 
 
 
