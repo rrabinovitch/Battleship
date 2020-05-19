@@ -98,16 +98,20 @@ class TurnTest < Minitest::Test
   end
 
   def test_computer_can_fire_at_human_board
-    @turn.computer_fires_at_user
-    assert_equal 15, @turn.human_board.remaining_cells.count
+    @turn.computer_fires_at_user("A1")
+    @turn.computer_fires_at_user("B1")
 
-    5.times do
-      @turn.computer_fires_at_user
-    end
-    assert_equal 10, @turn.human_board.remaining_cells.count
+    assert_equal false, @turn.human_board.remaining_cells.include?(@human_board.cells["A1"])
+    assert_equal false, @turn.human_board.remaining_cells.include?(@human_board.cells["B1"])
+
+    random_cell = @turn.computer_select_cell
+    @turn.computer_fires_at_user(random_cell)
+    
+    assert_equal 13, @turn.human_board.remaining_cells.count
   end
 
   def test_it_can_display_results
+    skip
     @turn.human_fires_at_computer("A4")
     @turn.human_fires_at_computer("D1")
     @turn.human_fires_at_computer("D2")

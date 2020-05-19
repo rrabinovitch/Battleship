@@ -15,7 +15,7 @@ class Turn
     end
   end
 
-  def computer_random_cell_selection
+  def computer_select_cell
     @human_board.cells.keys.sample
   end
 
