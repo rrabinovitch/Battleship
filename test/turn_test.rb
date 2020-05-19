@@ -23,6 +23,8 @@ class TurnTest < Minitest::Test
 
     @computer_board.place(@computer_cruiser, ["B1", "B2", "B3"])
     @computer_board.place(@computer_submarine, ["D1", "D2"])
+
+    @invalid_coordinate_message = "This is an invalid coordinate. Select another one to fire at."
   end
 
   def test_it_exists
@@ -60,36 +62,32 @@ class TurnTest < Minitest::Test
 
   end
 
-  def test_player_can_fire_at_an_empty_cell
-    @turn.player_fires_at(@computer_board.cells["A4"].fire_upon)
-
+  def test_human_can_fire_at_computer_and_render_different_types_of_hits
+    @turn.human_fires_at_computer("A4")
     assert_equal true, @turn.computer_board.cells["A4"].fired_upon?
     assert_equal "M", @turn.computer_board.cells["A4"].render
-  end
 
-  def test_it_can_fire_at_a_cell_with_a_ship_and_affect_its_health
-    @turn.player_fires_at(@human_board.cells["A1"].fire_upon)
-
-    assert_equal true, @turn.human_board.cells["A1"].fired_upon?
-    assert_equal false, @turn.human_board.cells["A1"].ship.sunk?
-    assert_equal "H", @turn.human_board.cells["A1"].render
-    assert_equal 2, @turn.human_board.cells["A1"].ship.health
-  end
-
-  def test_it_can_sink_a_ship
-    @turn.player_fires_at(@computer_board.cells["D1"].fire_upon)
+    @turn.human_fires_at_computer("D1")
     assert_equal true, @turn.computer_board.cells["D1"].fired_upon?
+    assert_equal "H", @turn.computer_board.cells["D1"].render
+    assert_equal 1, @turn.computer_board.cells["D1"].ship.health
+    assert_equal false, @turn.computer_board.cells["D1"].ship.sunk?
 
-    @turn.player_fires_at(@computer_board.cells["D2"].fire_upon)
+    @turn.human_fires_at_computer("D2")
     assert_equal true, @turn.computer_board.cells["D2"].fired_upon?
-
-    assert_equal "X", @turn.computer_board.cells["D1"].render
     assert_equal "X", @turn.computer_board.cells["D2"].render
-
+    assert_equal "X", @turn.computer_board.cells["D1"].render
     assert_equal true, @turn.computer_board.cells["D1"].ship.sunk?
+
+    # add assertion to check if any ships remaining?
+  end
+
+  def test_human_receives_error_message_if_fire_attempted_on_invalid_coordinate
+
   end
 
   def test_it_can_identify_remaining_cells_on_each_board
+    skip
     assert_equal
   end
 
