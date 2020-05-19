@@ -18,8 +18,8 @@ class TurnTest < Minitest::Test
     @human_board.place(@human_cruiser, ["A1", "A2", "A3"])
     @human_board.place(@human_submarine, ["C1", "C2"])
 
-    @comptuter_board.place(@comptuter_cruiser, ["B1", "B2", "B3"])
-    @comptuter_board.place(@comptuter_submarine, ["D1", "D2"])
+    @computer_board.place(@comptuter_cruiser, ["B1", "B2", "B3"])
+    @computer_board.place(@comptuter_submarine, ["D1", "D2"])
   end
 
   def test_it_exists
@@ -28,7 +28,14 @@ class TurnTest < Minitest::Test
 
   def test_it_has_a_player_board
     assert_equal @player_board, @turn.player_board
-    # test rendering of board
+
+    humans_set_up_board = "  1 2 3 4 \n" +
+                    "A H . . . \n" +
+                    "B M . . . \n" +
+                    "C . . . . \n" +
+                    "D . . . . \n"
+
+
   end
 
   def test_it_has_a_computer_board
@@ -38,15 +45,15 @@ class TurnTest < Minitest::Test
 
   def test_player_can_fire_at_a_cell
     @turn.player_fires_at(@computer_board.cells["A4"].fire_upon)
+
+    assert_equal true, @turn.computer_board.cells["A4"].fired_upon?
     assert_equal "M", @turn.computer_board.cells["A4"].render
-    # result: cell should be fired upon
-    # check player.board.cell to make sure it's been fired upon
 
+    @turn.player_fires_at(@human_board.cells["A1"].fire_upon)
 
-    # rendering of the cell
-
-    # testing hitting a cell that has a ship
-    # => ship health
+    assert_equal true, @turn.computer_board.cells["A1"].fired_upon?
+    assert_equal "H", @turn.computer_board.cells["A1"].render
+    assert_equal 2, @turn.computer_board.cells["A1"].ship.health
   end
   #
   # def test_it_can_identify_remaining_cells_on_each_board
