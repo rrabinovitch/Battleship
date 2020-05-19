@@ -205,4 +205,14 @@ class BoardTest < Minitest::Test
 
     assert_equal sunken_ship_board, @board.render
   end
+
+  def test_it_can_identify_cells_not_yet_fired_upon
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    @board.cells["A1"].fire_upon
+    @board.cells["B1"].fire_upon
+    @board.cells["A2"].fire_upon
+    @board.cells["A3"].fire_upon
+    
+    require "pry"; binding.pry
+  end
 end
