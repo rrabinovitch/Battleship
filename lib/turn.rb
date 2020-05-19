@@ -24,6 +24,9 @@ class Turn
   end
 
   def display_results
-
+    p "=============COMPUTER BOARD============= \n" +
+    "#{@computer_board.render} \n" +
+    "==============PLAYER BOARD============== \n" +
+    "#{@human_board.render}"
   end
 end

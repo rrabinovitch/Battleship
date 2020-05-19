@@ -106,22 +106,34 @@ class TurnTest < Minitest::Test
 
     random_cell = @turn.computer_select_cell
     @turn.computer_fires_at_user(random_cell)
-    
+
     assert_equal 13, @turn.human_board.remaining_cells.count
   end
 
   def test_it_can_display_results
-    skip
+    @turn.human_fires_at_computer("B1")
     @turn.human_fires_at_computer("A4")
     @turn.human_fires_at_computer("D1")
     @turn.human_fires_at_computer("D2")
 
-    @turn.computer_fires_at_user
-    assert_equal 15, @turn.human_board.remaining_cells.count
 
-    5.times do
-      @turn.computer_fires_at_user
-    end
-    assert_equal 10, @turn.human_board.remaining_cells.count
+    @turn.computer_fires_at_user("A1")
+    @turn.computer_fires_at_user("B3")
+    @turn.computer_fires_at_user("C1")
+    @turn.computer_fires_at_user("C2")
+
+    display = "=============COMPUTER BOARD============= \n" +
+              "  1 2 3 4 \n" +
+              "A . . . M \n" +
+              "B H . . . \n" +
+              "C . . . . \n" +
+              "D X X . . \n" +
+              "==============PLAYER BOARD============== \n" +
+              "  1 2 3 4 \n" +
+              "A H . . . \n" +
+              "B . . M . \n" +
+              "C X X . . \n" +
+              "D . . . . \n"
+    assert_equal display, @turn.display_results
   end
 end
