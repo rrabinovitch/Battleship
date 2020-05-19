@@ -4,7 +4,6 @@ class Turn
   def initialize(human_board, computer_board)
     @human_board = human_board
     @computer_board = computer_board
-    # @turn_type - whether this is an attribute, depends on how often this piece of info matters
   end
 
   def human_fires_at_computer(user_input)
@@ -17,15 +16,7 @@ class Turn
   end
 
   def computer_fires_at_user
-    
+    random_cell = @human_board.cells.keys.sample
+    @human_board.cells[random_cell].fire_upon
   end
-
-
-# computer =  user_input is generated randomly by program
-
-# what has to happen before this method
-  # if its players turn, use gets.chomp
-  # if its computers turn, randomly generate
-
-
 end

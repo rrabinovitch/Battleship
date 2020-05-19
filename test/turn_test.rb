@@ -62,7 +62,7 @@ class TurnTest < Minitest::Test
 
   end
 
-  def test_human_can_fire_at_computer_and_render_different_types_of_hits
+  def test_human_can_fire_at_computer_board_and_render_different_types_of_hits
     @turn.human_fires_at_computer("A4")
     assert_equal true, @turn.computer_board.cells["A4"].fired_upon?
     assert_equal "M", @turn.computer_board.cells["A4"].render
@@ -87,11 +87,27 @@ class TurnTest < Minitest::Test
   end
 
   def test_it_can_identify_remaining_cells_on_each_board
-    skip
-    assert_equal
+    @turn.human_fires_at_computer("A4")
+    @turn.human_fires_at_computer("D1")
+    @turn.human_fires_at_computer("D2")
+    assert_equal false, @turn.computer_board.cells.include?(@computer_board.cells["A4"])
+    assert_equal false, @turn.computer_board.cells.include?(@computer_board.cells["D1"])
+    assert_equal false, @turn.computer_board.cells.include?(@computer_board.cells["D2"])
+
+    # add assertions for computer's board after human fires a few times
   end
 
-  def test_it_has_a_result
-    skip
+  def test_computer_can_fire_at_human_board
+    @turn.computer_fires_at_user
+    assert_equal 15, @turn.human_board.remaining_cells.count
+
+    5.times do
+      @turn.computer_fires_at_user
+    end
+    assert_equal 10, @turn.human_board.remaining_cells.count
+  end
+
+  def test_it_can_display_results
+    
   end
 end
