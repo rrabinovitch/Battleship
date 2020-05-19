@@ -124,8 +124,18 @@ class Board
   end
 
   def remaining_cells
-    @cells.select do |coordinate, cell|
-      !cell.fired_upon?
+    @cells.reject do |_coordinate, cell|
+      cell.fired_upon?
+    end
+  end
+
+  def all_ships_sunk?
+    cells_with_ships = @cells.select do |_coordinate, cell|
+      cell.ship
+    end
+
+    cells_with_ships.all? do |_coordinate, cell|
+      cell.ship.sunk?
     end
   end
 end
