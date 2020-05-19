@@ -36,4 +36,14 @@ class Turn
   def display_turn_results
     p "#{display_computer_board} + #{display_human_board}"
   end
+
+  def human_lost?
+    false unless @human_board.all_ships_sunk?
+    true
+  end
+
+  def computer_lost?
+    false unless @computer_board.all_ships_sunk?
+    true
+  end
 end
