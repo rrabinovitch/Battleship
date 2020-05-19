@@ -124,8 +124,8 @@ class Board
   end
 
   def remaining_cells
-    @cells.select do |name, coordinate|
-      !coordinate.fired_upon?
+    @cells.select do |coordinate, cell|
+      !cell.fired_upon?
     end
   end
 end

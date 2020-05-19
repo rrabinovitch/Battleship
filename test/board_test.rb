@@ -212,7 +212,11 @@ class BoardTest < Minitest::Test
     @board.cells["B1"].fire_upon
     @board.cells["A2"].fire_upon
     @board.cells["A3"].fire_upon
-    
-    require "pry"; binding.pry
+
+    assert_equal false, @board.remaining_cells.include?(@board.cells["A1"])
+    assert_equal false, @board.remaining_cells.include?(@board.cells["B1"])
+    assert_equal false, @board.remaining_cells.include?(@board.cells["A2"])
+    assert_equal false, @board.remaining_cells.include?(@board.cells["A3"])
+
   end
 end
