@@ -38,12 +38,19 @@ class Turn
   end
 
   def human_lost?
-    false unless @human_board.all_ships_sunk?
-    true
+    # is there a way to turn this into oneline or just something shorter?
+    if @human_board.all_ships_sunk? == true
+      true
+    else
+      false
+    end
   end
 
   def computer_lost?
-    false unless @computer_board.all_ships_sunk?
-    true
+    if @computer_board.all_ships_sunk? == true
+      true
+    else
+      false
+    end
   end
 end

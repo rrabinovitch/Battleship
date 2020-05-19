@@ -138,26 +138,26 @@ class TurnTest < Minitest::Test
 
   def test_it_can_identify_if_either_player_has_lost_after_last_fire
     @turn.human_fires_at_computer("B1")
-    @turn.human_fires_at_computer("A4")
-    @turn.human_fires_at_computer("D1")
     @turn.computer_fires_at_user("A1")
+
+    @turn.human_fires_at_computer("A4")
     @turn.computer_fires_at_user("A2")
+
+    @turn.human_fires_at_computer("D1")
     @turn.computer_fires_at_user("A3")
 
     assert_equal false, @turn.human_lost?
     assert_equal false, @turn.computer_lost?
 
     @turn.human_fires_at_computer("D2")
-    @turn.human_fires_at_computer("D3")
     @turn.computer_fires_at_user("C1")
+    @turn.human_fires_at_computer("D3")
     @turn.computer_fires_at_user("C2")
-    
+
     assert_equal true, @turn.human_lost?
     assert_equal false, @turn.computer_lost?
   end
 end
-
-
 
 # "=============COMPUTER BOARD============= \n
 #     1 2 3 4 \n
