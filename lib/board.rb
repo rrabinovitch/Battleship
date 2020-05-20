@@ -121,6 +121,7 @@ class Board
     end
   end
 
+  # consider moving this functionality to computer and human classes
   def remaining_cells
     @cells.reject do |_coordinate, cell|
       cell.fired_upon?

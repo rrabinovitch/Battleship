@@ -6,51 +6,42 @@ class Turn
     @computer_board = computer_board
   end
 
-  def human_fires_at_computer(user_input)
-    # user_input generated via gets.chomp
-    if @computer_board.valid_coordinate?(user_input)
-      @computer_board.cells[user_input].fire_upon
-    else
-      p "This is an invalid coordinate. Select another one to fire at."
-    end
-  end
+  # removed human fires at computer method
 
-  def computer_select_cell
-    @human_board.remaining_cells.keys.sample
-  end
 
-  def computer_fires_at_human(random_cell)
-    @human_board.cells[random_cell].fire_upon
-  end
+  # removed computer_select_cell method
+  # removed computer fires at human
 
-  def display_computer_board
-    "=============COMPUTER BOARD============= \n" +
-    "#{@computer_board.render}"
-  end
 
-  def display_human_board
-    "==============PLAYER BOARD============== \n" +
-    "#{@human_board.render}"
-  end
+  # move to game class
+      def display_computer_board
+        "=============COMPUTER BOARD============= \n" +
+        "#{@computer_board.render}"
+      end
 
-  def display_turn_results
-    p "#{display_computer_board}" + "#{display_human_board}"
-  end
+      def display_human_board
+        "==============PLAYER BOARD============== \n" +
+        "#{@human_board.render}"
+      end
 
-  def human_lost?
-    # is there a way to turn this into oneline or just something shorter?
-    if @human_board.all_ships_sunk? == true
-      true
-    else
-      false
-    end
-  end
+      def display_turn_results
+        p "#{display_computer_board}" + "#{display_human_board}"
+      end
 
-  def computer_lost?
-    if @computer_board.all_ships_sunk? == true
-      true
-    else
-      false
-    end
-  end
+  # def human_lost?
+  #   # is there a way to turn this into oneline or just something shorter?
+  #   if @human_board.all_ships_sunk? == true
+  #     true
+  #   else
+  #     false
+  #   end
+  # end
+  #
+  # def computer_lost?
+  #   if @computer_board.all_ships_sunk? == true
+  #     true
+  #   else
+  #     false
+  #   end
+  # end
 end

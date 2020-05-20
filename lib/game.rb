@@ -1,16 +1,21 @@
 # require './lib/turn'
 
+#
+# removed computer_select_coordinates
+# computer_place_ships
 class Game
 
   def initialize
+    @human = Human.new
+    @computer = Computer.new
     # @game_winner = ""
-    @human_cruiser = Ship.new("Cruiser", 3)
-    @human_submarine = Ship.new("Submarine", 2)
-
-    @computer_cruiser = Ship.new("Cruiser", 3)
-    @computer_submarine = Ship.new("Submarine", 2)
-
-    @turn = Turn.new(@human_board = Board.new, @computer_board = Board.new)
+    # @human_cruiser = Ship.new("Cruiser", 3)
+    # @human_submarine = Ship.new("Submarine", 2)
+    #
+    # @computer_cruiser = Ship.new("Cruiser", 3)
+    # @computer_submarine = Ship.new("Submarine", 2)
+    #
+    # @turn = Turn.new(@human_board = Board.new, @computer_board = Board.new)
   end
 
   def get_user_input
@@ -22,24 +27,7 @@ class Game
       "Enter p to play. Enter q to quit."
   end
 
-  def computer_select_coordinates(ship)
-    coordinates = []
-    until board.valid_placement?(ship, coordinates)
-      coordinates = []
-      ship.length.times do
-        coordinates << board.cells.keys.sample
-      end
-    end
-    coordinates
-  end
 
-  def computer_place_ships
-    cruiser_coordinates = computer_select_coordinates(cruiser)
-    computer.place(cruiser, cruiser_coordinates)
-
-    submarine_coordinates = computer_select_coordinates(submarine)
-    computer.place(submarine, submarine_coordinates)
-  end
 
   # def human_place_cruiser
   #   p "Enter the coordinates for where you'd like to place your Cruiser (3 spaces):"
@@ -65,5 +53,8 @@ class Game
 
   end
 
+  def setup
+    #
+  end
 
 end
