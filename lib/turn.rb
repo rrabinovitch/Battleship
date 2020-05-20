@@ -5,7 +5,8 @@ require './lib/turn'
 require './lib/game_setup'
 
 class Turn
-  attr_reader :human_board, :computer_board
+  attr_reader :human_board,
+              :computer_board
 
   def initialize(human_board, computer_board)
     @human_board = human_board
