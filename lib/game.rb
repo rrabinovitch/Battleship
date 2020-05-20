@@ -24,19 +24,32 @@ class Game
 
   def computer_select_coordinates(ship)
     coordinates = []
-    until @turn.computer_board.valid_placement?(ship, coordinates)
-      coordinates = @turn.computer_board.cells.keys.sample(ship.length)
+    until board.valid_placement?(ship, coordinates)
+      coordinates = []
+      ship.length.times do
+        coordinates << board.cells.keys.sample
+      end
     end
     coordinates
   end
 
   def computer_place_ships
-    cruiser_coordinates = computer_select_coordinates(@computer_cruiser)
-    @turn.computer_board.place(@computer_cruiser, cruiser_coordinates)
+    cruiser_coordinates = computer_select_coordinates(cruiser)
+    computer.place(cruiser, cruiser_coordinates)
 
-
-    @turn.computer_board.place(@computer_submarine, )
+    submarine_coordinates = computer_select_coordinates(submarine)
+    computer.place(submarine, submarine_coordinates)
   end
+
+  # def human_place_cruiser
+  #   p "Enter the coordinates for where you'd like to place your Cruiser (3 spaces):"
+  #   get_user_input
+  #
+  # end
+  #
+  # def human_place_submarine
+  #
+  # end
 
   def start
     computer_place_ships

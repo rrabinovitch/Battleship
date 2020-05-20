@@ -26,7 +26,7 @@ class GameTest < Minitest::Test
   end
 
   def test_computer_can_select_random_consecutive_coordinates
-    require "pry"; binding.pry
-    # @game.computer_select_coordinates(@computer_cruiser)
+    comp_cruiser_coords = @game.computer_select_coordinates(@computer_cruiser)
+    @game
   end
 end
