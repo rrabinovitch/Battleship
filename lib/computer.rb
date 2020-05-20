@@ -12,7 +12,6 @@ class Computer
   end
 
   def select_placement_coordinates(ship)
-    # require "pry"; binding.pry
     coordinates = []
     until @board.valid_placement?(ship, coordinates)
       coordinates = []
@@ -23,15 +22,19 @@ class Computer
     coordinates
   end
 
-  def place_cruiser
-    cruiser_coordinates = select_placement_coordinates(@cruiser)
-    @board.place(@cruiser, cruiser_coordinates)
-  end
+  # def place_cruiser
+  #   cruiser_coordinates = select_placement_coordinates(@cruiser)
+  #   @board.place(@cruiser, cruiser_coordinates)
+  # end
+  #
+  # def place_submarine
+  #   submarine_coordinates = select_placement_coordinates(@submarine)
+  #   @board.place(@submarine, submarine_coordinates)
+  # end
 
-  def place_submarine
-    # require "pry"; binding.pry
-    submarine_coordinates = select_placement_coordinates(@submarine)
-    @board.place(@submarine, submarine_coordinates)
+  def place_ship(ship)
+    coordinates = select_placement_coordinates(ship)
+    @board.place(ship, coordinates)
   end
 
   def fire(human_board)

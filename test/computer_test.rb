@@ -60,10 +60,9 @@ class ComputerTest < Minitest::Test
   end
 
   def test_it_can_place_submarine # something with ship placement not working
-    skip
     @computer.stubs(:select_placement_coordinates).returns(["C2", "D2"])
-    @computer.place_submarine
-
+    @computer.place_ship(@submarine)
+    require "pry"; binding.pry
     revealed_board = "  1 2 3 4 \n" +
                     "A . . . . \n" +
                     "B . . . . \n" +

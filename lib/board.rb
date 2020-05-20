@@ -100,7 +100,9 @@ class Board
     if valid_placement?(ship, coordinates)
       coordinates.each do |coordinate|
         if @cells[coordinate].empty?
-        @cells[coordinate].place_ship(ship)
+          @cells[coordinate].place_ship(ship)
+        else
+          "invalid placement"
         end
       end
     end
