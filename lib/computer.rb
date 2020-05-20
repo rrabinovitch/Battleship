@@ -1,5 +1,5 @@
 class Computer
-  attr_reader :board
+  attr_reader :board, :cruiser, :submarine, :coordinates_guessed
 
   def initialize
     @board = Board.new
