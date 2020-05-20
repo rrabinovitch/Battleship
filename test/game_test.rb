@@ -3,6 +3,7 @@ require 'minitest/pride'
 require './lib/ship'
 require './lib/cell'
 require './lib/board'
+require './lib/turn'
 require './lib/game'
 
 class GameTest < Minitest::Test
@@ -15,7 +16,8 @@ class GameTest < Minitest::Test
   end
 
   def test_it_displays_a_menu
-    menu = "Welcome to BATTLESHIP \n" + "Enter p to play. Enter q to quit."
+    menu = "Welcome to BATTLESHIP \n" +
+            "Enter p to play. Enter q to quit."
     assert_equal menu, @game.display_menu
   end
 

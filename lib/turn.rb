@@ -16,7 +16,7 @@ class Turn
   end
 
   def computer_select_cell
-    @human_board.cells.keys.sample
+    @human_board.remaining_cells.keys.sample
   end
 
   def computer_fires_at_user(random_cell)
@@ -25,12 +25,12 @@ class Turn
 
   def display_computer_board
     "=============COMPUTER BOARD============= \n" +
-    "#{@computer_board.render} \n"
+    "#{@computer_board.render}"
   end
 
   def display_human_board
     "==============PLAYER BOARD============== \n" +
-    "#{@human_board.render} \n"
+    "#{@human_board.render}"
   end
 
   def display_turn_results

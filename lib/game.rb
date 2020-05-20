@@ -1,9 +1,10 @@
 class Game
 
   def initialize
+    @game_winner = ""
   end
 
-  def process
+  def play
     display_menu
     input = get_user_input
     if input == "p"
@@ -13,7 +14,6 @@ class Game
     elsif input == "q"
       p "Thanks for playing!"
     end
-
   end
 
   def get_user_input
@@ -21,8 +21,8 @@ class Game
   end
 
   def display_menu
-    p "Welcome to BATTLESHIP \n" + "Enter p to play. Enter q to quit."
-
+    p "Welcome to BATTLESHIP \n" +
+      "Enter p to play. Enter q to quit."
   end
 
   def start_game

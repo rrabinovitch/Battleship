@@ -4,6 +4,7 @@ require './lib/ship'
 require './lib/cell'
 require './lib/board'
 require './lib/turn'
+require 'awesome_print'
 
 class TurnTest < Minitest::Test
   def setup
@@ -159,22 +160,18 @@ class TurnTest < Minitest::Test
   end
 end
 
+#
 # "=============COMPUTER BOARD============= \n
-#     1 2 3 4 \n
+#   1 2 3 4 \n
 #   A . . . M \n
 #   B H . . . \n
 #   C . . . . \n
 #   D X X . . \n
-#   ==============PLAYER BOARD============== \n
-#     1 2 3 4 \n
+#    \n +
+# ==============PLAYER BOARD============== \n
+#   1 2 3 4 \n
 #   A H . . . \n
 #   B . . M . \n
 #   C X X . . \n
-#   D . . . . \n"
-#
-# "==============PLAYER BOARD============== \n
-#   1 2 3 4 \n
-# A H . . . \n
-# B . . M . \n
-# C X X . . \n
-# D . . . . \n \n"
+#   D . . . . \n
+#   \n"
