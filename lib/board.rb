@@ -1,9 +1,7 @@
 class Board
-  attr_reader :ships,
-              :cells
+  attr_reader :cells
 
   def initialize
-    @ships = []
     @cells = make_cells
   end
 
@@ -130,6 +128,7 @@ class Board
   end
 
   def all_ships_sunk?
+    # try w each_key?
     cells_with_ships = @cells.select do |_coordinate, cell|
       cell.ship
     end

@@ -19,7 +19,7 @@ class Turn
     @human_board.remaining_cells.keys.sample
   end
 
-  def computer_fires_at_user(random_cell)
+  def computer_fires_at_human(random_cell)
     @human_board.cells[random_cell].fire_upon
   end
 

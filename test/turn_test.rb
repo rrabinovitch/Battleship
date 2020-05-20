@@ -4,7 +4,6 @@ require './lib/ship'
 require './lib/cell'
 require './lib/board'
 require './lib/turn'
-require 'awesome_print'
 
 class TurnTest < Minitest::Test
   def setup
@@ -97,14 +96,14 @@ class TurnTest < Minitest::Test
   end
 
   def test_computer_can_fire_at_human_board
-    @turn.computer_fires_at_user("A1")
-    @turn.computer_fires_at_user("B1")
+    @turn.computer_fires_at_human("A1")
+    @turn.computer_fires_at_human("B1")
 
     assert_equal false, @turn.human_board.remaining_cells.include?(@human_board.cells["A1"])
     assert_equal false, @turn.human_board.remaining_cells.include?(@human_board.cells["B1"])
 
     random_cell = @turn.computer_select_cell
-    @turn.computer_fires_at_user(random_cell)
+    @turn.computer_fires_at_human(random_cell)
 
     assert_equal 13, @turn.human_board.remaining_cells.count
   end
@@ -116,10 +115,10 @@ class TurnTest < Minitest::Test
     @turn.human_fires_at_computer("D1")
     @turn.human_fires_at_computer("D2")
 
-    @turn.computer_fires_at_user("A1")
-    @turn.computer_fires_at_user("B3")
-    @turn.computer_fires_at_user("C1")
-    @turn.computer_fires_at_user("C2")
+    @turn.computer_fires_at_human("A1")
+    @turn.computer_fires_at_human("B3")
+    @turn.computer_fires_at_human("C1")
+    @turn.computer_fires_at_human("C2")
 
     display = "=============COMPUTER BOARD============= \n" +
               "  1 2 3 4 \n" +
@@ -139,21 +138,21 @@ class TurnTest < Minitest::Test
 
   def test_it_can_identify_if_either_player_has_lost_after_last_fire
     @turn.human_fires_at_computer("B1")
-    @turn.computer_fires_at_user("A1")
+    @turn.computer_fires_at_human("A1")
 
     @turn.human_fires_at_computer("A4")
-    @turn.computer_fires_at_user("A2")
+    @turn.computer_fires_at_human("A2")
 
     @turn.human_fires_at_computer("D1")
-    @turn.computer_fires_at_user("A3")
+    @turn.computer_fires_at_human("A3")
 
     assert_equal false, @turn.human_lost?
     assert_equal false, @turn.computer_lost?
 
     @turn.human_fires_at_computer("D2")
-    @turn.computer_fires_at_user("C1")
+    @turn.computer_fires_at_human("C1")
     @turn.human_fires_at_computer("D3")
-    @turn.computer_fires_at_user("C2")
+    @turn.computer_fires_at_human("C2")
 
     assert_equal true, @turn.human_lost?
     assert_equal false, @turn.computer_lost?

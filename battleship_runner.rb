@@ -8,12 +8,27 @@ game = Game.new
 game.display_menu
 input = game.get_user_input
 if input == "p"
-  game.start
+  game.setup
+  until game.over?
+    game.start
+  end
 elsif input == "q"
   p "Thanks for playing!"
 else
   p "Invalid input"
   input = game.get_user_input
-# until the user input = p, keep asking this question
-# look into abort statement
 end
+
+
+
+# game = Game.new
+# game.display_menu
+# input = game.get_user_input
+# if input == "p"
+#   game.start
+# elsif input == "q"
+#   p "Thanks for playing!"
+# else
+#   p "Invalid input"
+#   input = game.get_user_input
+# end
