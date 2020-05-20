@@ -96,6 +96,7 @@ class Board
   end
 
   def place(ship, coordinates)
+    # require "pry"; binding.pry
     if valid_placement?(ship, coordinates)
       coordinates.each do |coordinate|
         if @cells[coordinate].empty?

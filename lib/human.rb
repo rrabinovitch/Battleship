@@ -1,5 +1,8 @@
 class Human
-  attr_reader :board, :cruiser, :submarine, :coordinates_guessed
+  attr_reader :board,
+              :cruiser,
+              :submarine,
+              :coordinates_guessed
 
   def initialize
     @board = Board.new
