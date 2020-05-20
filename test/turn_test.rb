@@ -109,7 +109,6 @@ class TurnTest < Minitest::Test
   end
 
   def test_it_can_display_results
-    skip
     @turn.human_fires_at_computer("B1")
     @turn.human_fires_at_computer("A4")
     @turn.human_fires_at_computer("D1")
@@ -132,7 +131,6 @@ class TurnTest < Minitest::Test
               "B . . M . \n" +
               "C X X . . \n" +
               "D . . . . \n"
-
     assert_equal display, @turn.display_turn_results
   end
 
@@ -158,19 +156,3 @@ class TurnTest < Minitest::Test
     assert_equal false, @turn.computer_lost?
   end
 end
-
-#
-# "=============COMPUTER BOARD============= \n
-#   1 2 3 4 \n
-#   A . . . M \n
-#   B H . . . \n
-#   C . . . . \n
-#   D X X . . \n
-#    \n +
-# ==============PLAYER BOARD============== \n
-#   1 2 3 4 \n
-#   A H . . . \n
-#   B . . M . \n
-#   C X X . . \n
-#   D . . . . \n
-#   \n"

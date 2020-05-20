@@ -34,7 +34,7 @@ class Turn
   end
 
   def display_turn_results
-    p "#{display_computer_board} + #{display_human_board}"
+    p "#{display_computer_board}" + "#{display_human_board}"
   end
 
   def human_lost?
