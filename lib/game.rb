@@ -32,7 +32,6 @@ class Game
     @human.place_submarine
     puts ""
     puts ""
-    # @human.board.render(true)
     puts "Let's start playing!\n" +
         "At the start of each turn, you'll see my board showing the cells at which you've already fired " +
         "and your board showing your own ships and the cells at which I've already fired. \n" +

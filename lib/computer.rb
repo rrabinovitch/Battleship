@@ -32,11 +32,6 @@ class Computer
     @board.place(@submarine, submarine_coordinates)
   end
 
-  # def place_ship(ship)
-  #   coordinates = select_placement_coordinates(ship)
-  #   @board.place(ship, coordinates)
-  # end
-
   def fire(human_board)
     selection = @board.cells.keys.sample
     if !@coordinates_guessed.include?(selection)

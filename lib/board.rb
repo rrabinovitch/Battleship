@@ -123,7 +123,6 @@ class Board
     end
   end
 
-  # consider moving this functionality to computer and human classes
   def remaining_cells
     @cells.reject do |_coordinate, cell|
       cell.fired_upon?
@@ -131,7 +130,6 @@ class Board
   end
 
   def all_ships_sunk?
-    # try w each_key?
     cells_with_ships = @cells.select do |_coordinate, cell|
       cell.ship
     end
