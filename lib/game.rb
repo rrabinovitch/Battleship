@@ -1,5 +1,3 @@
-# removed computer_select_coordinates
-# computer_place_ships
 class Game
   attr_reader :human,
               :computer
@@ -14,26 +12,26 @@ class Game
   end
 
   def display_menu
-    p "Welcome to BATTLESHIP \n" +
+    puts "Welcome to BATTLESHIP \n" +
       "Enter p to play. Enter q to quit."
   end
 
   def setup
     @computer.place_cruiser
     @computer.place_submarine
-    p "I have laid out my ships on the grid. \n" +
-      "You now need to lay out your two ships." +
-      "The cruiser is three units long and the submarine is two units long."
-      "#{@human.board.render(true)}"
+    puts "I have laid out my ships on the grid. \n" +
+        "You now need to lay out your two ships." +
+        "The cruiser is three units long and the submarine is two units long. \n" +
+        "Here is what your board looks like:"
+    puts "#{@human.board.render}"
     @human.place_cruiser
-    @human.board.render(true)
+    puts "#{@human.board.render(true)}"
     @human.place_submarine
     # @human.board.render(true)
-    p "Here are each of our boards: \n" +
-      "#{display_boards} \n" +
-      "At the start of each turn, you'll see my board showing the cells at which you've already fired " +
-      "and your board showing your own ships and the cells at which I've already fired. \n" +
-      "Let's start playing! You'll fire first."
+    puts "Let's start playing! \n" +
+        "At the start of each turn, you'll see my board showing the cells at which you've already fired " +
+        "and your board showing your own ships and the cells at which I've already fired. \n" +
+        "You'll fire first."
   end
 
   def play
@@ -55,7 +53,7 @@ class Game
   end
 
   def display_boards
-    p "=============COMPUTER BOARD============= \n" +
+    puts "=============COMPUTER BOARD============= \n" +
     "#{@computer.board.render} \n" +
     "==============YOUR BOARD============== \n" +
     "#{@human.board.render(true)}"
@@ -67,11 +65,11 @@ class Game
 
   def report_winner
     if @human.lost?
-      p "I won!"
+      puts "I won!"
     elsif @computer.lost?
-      p "You won!"
+      puts "You won!"
     else
-      p "There seems to have been an error."
+      puts "There seems to have been an error."
     end
   end
 end
