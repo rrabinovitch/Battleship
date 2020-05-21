@@ -12,7 +12,6 @@ class Computer
   end
 
   def select_placement_coordinates(ship)
-    # require "pry"; binding.pry
     coordinates = []
     until @board.valid_placement?(ship, coordinates)
       coordinates = []
@@ -29,10 +28,14 @@ class Computer
   end
 
   def place_submarine
-    # require "pry"; binding.pry
     submarine_coordinates = select_placement_coordinates(@submarine)
     @board.place(@submarine, submarine_coordinates)
   end
+
+  # def place_ship(ship)
+  #   coordinates = select_placement_coordinates(ship)
+  #   @board.place(ship, coordinates)
+  # end
 
   def fire(human_board)
     selection = @board.cells.keys.sample
@@ -43,11 +46,11 @@ class Computer
     end
   end
 
-  # def select_cell_to_fire(human_board)
-  #   human_board.remaining_cells.keys.sample
-  # end
-
-
-
-  # check if computer has lost
+  def lost?
+    if all_ships_sunk?
+      true
+    else
+      false
+    end
+  end
 end
