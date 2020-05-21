@@ -2,7 +2,7 @@ require './lib/ship'
 require './lib/cell'
 require './lib/board'
 require './lib/turn'
-require './lib/game_setup'
+
 
 class Turn
   attr_reader :human_board,
@@ -11,8 +11,8 @@ class Turn
   def initialize(human_board, computer_board)
     @human_board = human_board
     @computer_board = computer_board
-    @computer_ships = @game_setup.computer_ships
-    @player_ships = @game_setup.player_ships
+    @computer_ships = []
+    @player_ships = []
   end
 
   def human_fires_at_computer(user_input)

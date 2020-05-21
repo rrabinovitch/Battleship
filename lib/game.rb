@@ -1,29 +1,20 @@
-require './lib/menu'
-require './lib/game_setup'
+require './lib/game'
 require './lib/ship'
+require './lib/cell'
 require './lib/board'
+require './lib/turn'
+
 
 class Game
 
   def initialize
-    @menu = Menu.new
-    @setup = Setup.new
-    @all_player_shots = []
-    @all_computer_shots = []
-    @computer_ships = @setup.computer_ships
-    @player_ships = @setup.player_ships
-    @response = @menu.respose
-    @player_board = @setup.player_board
-    @computer_board = @setup.computer_board
+    @computer = Computer.new
+    #@computer_ships = @turn.computer_ships?
+    #@player_ships = @turn.player_ships?
+    @player_board = @turn.player_board
+    @computer_board = @turn.computer_board
   end
 
-
-  def start_from_menu
-    @menu.start_display_menu
-    if @menu.response == "P" || @menu.response == "PLAY"
-      play_game()
-    end
-  end
 
   def display_game_boards
       p "=============COMPUTER BOARD============= "
@@ -60,4 +51,5 @@ class Game
       p "-----------------------------"
     end
   end
+
 end

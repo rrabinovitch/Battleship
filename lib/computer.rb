@@ -9,10 +9,9 @@ class Computer
     @submarine = Ship.new("Submarine", 2)
   end
 
-  def place_cruiser_ai
+  def place_cruiser_ai(ship)
 
   end
-
 
   def place_submarine_ai
 
