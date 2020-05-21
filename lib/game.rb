@@ -15,6 +15,17 @@ class Game
     puts "Welcome to BATTLESHIP:\n" +
       "Enter p to play. Enter q to quit."
     print "=> "
+    input = get_user_input.downcase
+    if input == "p"
+      puts "..."
+      sleep(2.5)
+      system 'clear'
+      setup
+    elsif input == "q"
+      puts "Thanks for playing!"
+    else
+      puts "Invalid input. Goodbye!"
+    end
   end
 
   def setup
@@ -28,26 +39,30 @@ class Game
     puts ""
     @human.place_cruiser
     puts ""
-    puts "#{@human.board.render(true)}"
+    puts "Here is where you placed your cruiser:\n#{@human.board.render(true)}"
     @human.place_submarine
+    puts "Your board is now set up:\n#{@human.board.render(true)}"
     puts ""
     puts ""
     puts "Let's start playing!\n" +
         "At the start of each turn, you'll see my board showing the cells at which you've already fired " +
         "and your board showing your own ships and the cells at which I've already fired. \n" +
         "You'll fire first."
-    system 'clear'
+    puts "..."
+    sleep(4)
     play
   end
 
   def play
     until over?
+      sleep(2)
+      system 'clear'
       display_boards
       @human.fire(@computer.board)
       @computer.fire(@human.board)
-      system 'clear'
     end
     report_winner
+    display_menu
   end
 
   def over?
@@ -66,10 +81,10 @@ class Game
   end
 
   def report_winner
-    if @human.lost?
-      puts "I won!"
-    elsif @computer.lost?
+    if @computer.lost?
       puts "You won!"
+    elsif @human.lost?
+      puts "I won!"
     else
       puts "There seems to have been an error."
     end

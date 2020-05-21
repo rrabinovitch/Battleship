@@ -66,22 +66,18 @@ class Human
     if !@coordinates_guessed.include?(user_input) && computer_board.valid_coordinate?(user_input)
       computer_board.cells[user_input].fire_upon
       @coordinates_guessed << user_input
-      turn_results(user_input)
+      if computer_board.cells[user_input].render == "H"
+        puts "Your shot on #{user_input} was a hit."
+      elsif computer_board.cells[user_input].render == "M"
+        puts "Your shot on #{user_input} was a miss."
+      elsif computer_board.cells[user_input].render == "X"
+        puts "Your shot on #{user_input} sunk a ship."
+      end
     else
       puts "\nThat was an invalid coodinate selection. Please choose another one."
       fire(computer_board)
     end
     puts "..."
-  end
-
-  def turn_results(user_input)
-    if computer_board.cells[user_input].render == "H"
-      puts "Your shot on #{user_input} was a hit."
-    elsif computer_board.cells[user_input].render == "M"
-      puts "Your shot on #{user_input} was a miss."
-    elsif computer_board.cells[user_input].render == "X"
-      puts "Your shot on #{user_input} sunk a ship."
-    end
   end
 
   def lost?
