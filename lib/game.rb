@@ -59,6 +59,8 @@ class Game
       system 'clear'
       display_boards
       @human.fire(@computer.board)
+      break if over?
+
       @computer.fire(@human.board)
     end
     report_winner
