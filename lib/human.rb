@@ -14,27 +14,44 @@ class Human
   def place_cruiser
     cruiser_coordinates = []
     p "Select the first coordinate at which you'd like to place your cruiser:"
-    coord1 = gets.chomp
-    cruiser_coordinates << coord1
+    coord_1 = gets.chomp
+    cruiser_coordinates << coord_1.upcase
     p "Select the second coordinate at which you'd like to place your cruiser:"
-    coord2 = gets.chomp
-    cruiser_coordinates << coord2
-    p "Select the last coordinate at which you'd like to place your cruiser:"
-    coord3 = gets.chomp
-    cruiser_coordinates << coord3
-    # can using a times do loop instead
+    coord_2 = gets.chomp
+    cruiser_coordinates << coord_2.upcase
+    p "Select the third coordinate at which you'd like to place your cruiser:"
+    coord_3 = gets.chomp
+    cruiser_coordinates << coord_3.upcase
+    # can try using a times do loop instead
 
     if @board.valid_placement?(@cruiser, cruiser_coordinates)
       @board.place(@cruiser, cruiser_coordinates)
     else
-      "Those coordinates aren't valid - please try again"
+      p "\n Those coordinates aren't valid - please try again"
       place_cruiser
     end
   end
 
+  def place_submarine
+    submarine_coordinates = []
+    p "Select the first coordinate at which you'd like to place your submarine:"
+    coord_1 = gets.chomp
+    submarine_coordinates << coord_1.upcase
+    p "Select the second coordinate at which you'd like to place your submarine:"
+    coord_2 = gets.chomp
+    submarine_coordinates << coord_2.upcase
+    # can try using a times do loop instead
+
+    if @board.valid_placement?(@submarine, submarine_coordinates)
+      @board.place(@submarine, submarine_coordinates)
+    else
+      p "\n Those coordinates aren't valid - please try again"
+      place_submarine
+    end
+  end
 
   def select_cell_to_fire
-    p "Enter a cell to fire at:"
+    p "Select a cell to fire at:"
     coordinate = gets.chomp
     coordinate
   end
@@ -52,17 +69,11 @@ class Human
     end
   end
 
-
-
-# define place sumbarine
-
-  # ask for user input - which cells to place ship in
-  # => # of cells needed depends on which ship
-  # confirm selected coordinates constitute valid placement on board
-  # actually place ship
-
-# to check if the human has lost:
-# => board.all_ships_sunk?
-
-
+  def lost?
+    if @board.all_ships_sunk?
+      true
+    else
+      false
+    end
+  end
 end
