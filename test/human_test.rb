@@ -24,7 +24,7 @@ class HumanTest < Minitest::Test
     assert_equal [], @human.coordinates_guessed
   end
 
-  def test_it_can_p
+  def test_it_can_pla
 
   end
 end

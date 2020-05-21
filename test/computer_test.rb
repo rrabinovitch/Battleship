@@ -15,27 +15,30 @@ class ComputerTest < Minitest::Test
     @submarine = @computer.submarine
 
     @human = Human.new
+    @human_cruiser = Ship.new("Cruiser", 3)
+    @human_submarine = Ship.new("Submarine", 2)
+  end
+
+  def human_board_setup
+    @human.board.place(@human_cruiser, ["A1", "B1", "C1"])
+    @human.board.place(@human_submarine, ["D2", "D3"])
   end
 
   def test_it_exists
-    skip
     assert_instance_of Computer, @computer
   end
 
   def test_it_has_a_board_and_two_ships
-    skip
     assert_instance_of Board, @computer.board
     assert_equal @cruiser, @computer.cruiser
     assert_equal @submarine, @computer.submarine
   end
 
   def test_it_starts_with_no_coordinates_guessed
-    skip
     assert_equal [], @computer.coordinates_guessed
   end
 
   def test_it_can_select_valid_coordinates_for_ship_placement
-    skip
     assert_equal 3, @computer.select_placement_coordinates(@cruiser).count
     assert_equal 2, @computer.select_placement_coordinates(@submarine).count
 
@@ -43,10 +46,11 @@ class ComputerTest < Minitest::Test
     # randomly selected for each ship pass through
     # the board.valid_placement?(ship, coordinates) method
       # figure out how to parse out components for testing this
+    # consider asserting that the returned array of coordinates are
+    # included in board.cells.keys??
   end
 
   def test_it_can_place_cruiser
-    skip
     @computer.stubs(:select_placement_coordinates).returns(["A1", "A2", "A3"])
     @computer.place_cruiser
 
@@ -60,10 +64,8 @@ class ComputerTest < Minitest::Test
   end
 
   def test_it_can_place_submarine # something with ship placement not working
-    skip
     @computer.stubs(:select_placement_coordinates).returns(["C2", "D2"])
     @computer.place_submarine
-
     revealed_board = "  1 2 3 4 \n" +
                     "A . . . . \n" +
                     "B . . . . \n" +
@@ -72,5 +74,30 @@ class ComputerTest < Minitest::Test
     assert_equal revealed_board, @computer.board.render(true)
   end
 
+  # consider refactoring to use a single place_ship method
+  # => adjust tests accordingly
 
+  def test_it_can_fire_at_human_board
+    skip #INCOMPLETE TEST
+    human_board_setup
+    selection_1 = mock("A1")
+    selection_2 = mock("A2")
+    selection_3 = mock("B1")
+
+    @computer.fire(@human.board)
+
+    revealed_board_1 = "  1 2 3 4 \n" +
+                      "A H M . . \n" +
+                      "B H . . . \n" +
+                      "C . S . . \n" +
+                      "D . S . . \n"
+    assert_equal revealed_board_1, @human.board.render(true)
+  end
+
+  def test_if_computer_has_lost
+    skip #INCOMPLETE TEST
+    assert_equal false, @computer.lost?
+
+    assert_equal true, @computer.lost?
+  end
 end
