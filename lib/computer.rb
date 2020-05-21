@@ -46,11 +46,11 @@ class Computer
     end
   end
 
-  # def select_cell_to_fire(human_board)
-  #   human_board.remaining_cells.keys.sample
-  # end
-
-
-
-  # check if computer has lost
+  def lost?
+    if all_ships_sunk?
+      true
+    else
+      false
+    end
+  end
 end
