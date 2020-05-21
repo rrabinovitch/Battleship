@@ -32,19 +32,25 @@ class Computer
     @board.place(@submarine, submarine_coordinates)
   end
 
-  # def place_ship(ship)
-  #   coordinates = select_placement_coordinates(ship)
-  #   @board.place(ship, coordinates)
-  # end
-
   def fire(human_board)
+    sleep(2)
     selection = @board.cells.keys.sample
     if !@coordinates_guessed.include?(selection)
       human_board.cells[selection].fire_upon
+      @coordinates_guessed << selection
+      if human_board.cells[selection].render == "H"
+        puts "My shot on #{selection} was a hit."
+      elsif human_board.cells[selection].render == "M"
+        puts "My shot on #{selection} was a miss."
+      elsif human_board.cells[selection].render == "X"
+        puts "My shot on #{selection} sunk a ship."
+      end
     else
-      select_cell_to_fire(human_board)
+      fire(human_board)
     end
   end
+
+
 
   def lost?
     if @board.all_ships_sunk?

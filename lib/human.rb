@@ -13,45 +13,49 @@ class Human
 
   def place_cruiser
     cruiser_coordinates = []
-    puts "Select the first coordinate at which you'd like to place your cruiser:"
+    puts "\nSelect the first coordinate at which you'd like to place your cruiser:"
+    print "=> "
     coord_1 = gets.chomp
     cruiser_coordinates << coord_1.upcase
-    puts "Select the second coordinate at which you'd like to place your cruiser:"
+    puts "\nSelect the second coordinate at which you'd like to place your cruiser:"
+    print "=> "
     coord_2 = gets.chomp
     cruiser_coordinates << coord_2.upcase
-    puts "Select the third coordinate at which you'd like to place your cruiser:"
+    puts "\nSelect the third coordinate at which you'd like to place your cruiser:"
+    print "=> "
     coord_3 = gets.chomp
     cruiser_coordinates << coord_3.upcase
-    # can try using a times do loop instead
 
     if @board.valid_placement?(@cruiser, cruiser_coordinates)
       @board.place(@cruiser, cruiser_coordinates)
     else
-      puts "\n Those coordinates aren't valid - please try again"
+      puts "\nThose coordinates aren't valid - please try again"
       place_cruiser
     end
   end
 
   def place_submarine
     submarine_coordinates = []
-    puts "Select the first coordinate at which you'd like to place your submarine:"
+    puts "\nSelect the first coordinate at which you'd like to place your submarine:"
+    print "=> "
     coord_1 = gets.chomp
     submarine_coordinates << coord_1.upcase
-    puts "Select the second coordinate at which you'd like to place your submarine:"
+    puts "\nSelect the second coordinate at which you'd like to place your submarine:"
+    print "=> "
     coord_2 = gets.chomp
     submarine_coordinates << coord_2.upcase
-    # can try using a times do loop instead
 
     if @board.valid_placement?(@submarine, submarine_coordinates)
       @board.place(@submarine, submarine_coordinates)
     else
-      puts "\n Those coordinates aren't valid - please try again"
+      puts "\nThose coordinates aren't valid - please try again"
       place_submarine
     end
   end
 
   def select_cell_to_fire
-    puts "Enter the coordinate for your shot:"
+    puts "\nEnter the coordinate for your shot:"
+    print "=> "
     coordinate = gets.chomp
     coordinate
   end
@@ -62,11 +66,18 @@ class Human
     if !@coordinates_guessed.include?(user_input) && computer_board.valid_coordinate?(user_input)
       computer_board.cells[user_input].fire_upon
       @coordinates_guessed << user_input
+      if computer_board.cells[user_input].render == "H"
+        puts "Your shot on #{user_input} was a hit."
+      elsif computer_board.cells[user_input].render == "M"
+        puts "Your shot on #{user_input} was a miss."
+      elsif computer_board.cells[user_input].render == "X"
+        puts "Your shot on #{user_input} sunk a ship."
+      end
     else
-      puts "Please enter a valid coordinate:"
+      puts "\nThat was an invalid coodinate selection. Please choose another one."
       fire(computer_board)
-      # calling a method within itself = recursive
     end
+    puts "..."
   end
 
   def lost?

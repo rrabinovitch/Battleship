@@ -12,36 +12,57 @@ class Game
   end
 
   def display_menu
-    puts "Welcome to BATTLESHIP \n" +
+    puts "Welcome to BATTLESHIP:\n" +
       "Enter p to play. Enter q to quit."
+    print "=> "
+    input = get_user_input.downcase
+    if input == "p"
+      puts "..."
+      sleep(2.5)
+      system 'clear'
+      setup
+    elsif input == "q"
+      puts "Thanks for playing!"
+    else
+      puts "Invalid input. Goodbye!"
+    end
   end
 
   def setup
     @computer.place_cruiser
     @computer.place_submarine
-    puts "I have laid out my ships on the grid. \n" +
-        "You now need to lay out your two ships." +
+    puts "I have laid out my ships on the grid.\n" +
+        "You now need to lay out your two ships.\n" +
         "The cruiser is three units long and the submarine is two units long. \n" +
         "Here is what your board looks like:"
     puts "#{@human.board.render}"
+    puts ""
     @human.place_cruiser
-    puts "#{@human.board.render(true)}"
+    puts ""
+    puts "Here is where you placed your cruiser:\n#{@human.board.render(true)}"
     @human.place_submarine
-    # @human.board.render(true)
-    puts "Let's start playing! \n" +
+    puts "Your board is now set up:\n#{@human.board.render(true)}"
+    puts ""
+    puts ""
+    puts "Let's start playing!\n" +
         "At the start of each turn, you'll see my board showing the cells at which you've already fired " +
         "and your board showing your own ships and the cells at which I've already fired. \n" +
         "You'll fire first."
+    puts "..."
+    sleep(4)
+    play
   end
 
   def play
     until over?
+      sleep(2)
+      system 'clear'
       display_boards
       @human.fire(@computer.board)
       @computer.fire(@human.board)
-      # report_turn_results
     end
     report_winner
+    display_menu
   end
 
   def over?
@@ -53,42 +74,19 @@ class Game
   end
 
   def display_boards
-    puts "=============COMPUTER BOARD============= \n" +
-    "#{@computer.board.render} \n" +
-    "==============YOUR BOARD============== \n" +
+    puts "=============COMPUTER BOARD=============\n" +
+    "#{@computer.board.render}\n" +
+    "==============YOUR BOARD==============\n" +
     "#{@human.board.render(true)}"
   end
 
-  def report_turn_results
-    # to be referenced in start method
-  end
-
   def report_winner
-    if @human.lost?
-      puts "I won!"
-    elsif @computer.lost?
+    if @computer.lost?
       puts "You won!"
+    elsif @human.lost?
+      puts "I won!"
     else
       puts "There seems to have been an error."
     end
   end
 end
-
-### setup is complete
-### show user @computer.board.render + @human.board.render(true)
-#
-### human fires at computer board - entering their cell selection themselves
-### => @human.fire(@computer.board)
-### computer fires at human board - randomly selected cell
-### => @computer.fire(@human.board)
-# *** # COME BACK TO THIS LATER: report results
-# *** #  => your shot on #{selected coordinate} was a #{hit, miss, sink?}
-# *** #  => my shot on #{selected coordinate} was a #{hit, miss, sink?}
-### display updated boards - w computer's board just rendered, and human's rendered *true*
-#
-### repeat the above chunk until game.over?
-### => which is true when @human.lost? || @computer.lost?
-### =>  if human.lost? => p "I won!"
-### =>  if computer.lost? => p "You won!"
-#
-# return to main menu

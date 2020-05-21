@@ -58,11 +58,11 @@ class ComputerTest < Minitest::Test
     @computer.stubs(:select_placement_coordinates).returns(["A1", "A2", "A3"])
     @computer.place_cruiser
 
-    revealed_board = "  1 2 3 4 \n" +
-                    "A S S S . \n" +
-                    "B . . . . \n" +
-                    "C . . . . \n" +
-                    "D . . . . \n"
+    revealed_board = "  1 2 3 4\n" +
+                    "A S S S .\n" +
+                    "B . . . .\n" +
+                    "C . . . .\n" +
+                    "D . . . ."
 
     assert_equal revealed_board, @computer.board.render(true)
   end
@@ -70,11 +70,11 @@ class ComputerTest < Minitest::Test
   def test_it_can_place_submarine # something with ship placement not working
     @computer.stubs(:select_placement_coordinates).returns(["C2", "D2"])
     @computer.place_submarine
-    revealed_board = "  1 2 3 4 \n" +
-                    "A . . . . \n" +
-                    "B . . . . \n" +
-                    "C . S . . \n" +
-                    "D . S . . \n"
+    revealed_board = "  1 2 3 4\n" +
+                    "A . . . .\n" +
+                    "B . . . .\n" +
+                    "C . S . .\n" +
+                    "D . S . ."
     assert_equal revealed_board, @computer.board.render(true)
   end
 
@@ -90,11 +90,11 @@ class ComputerTest < Minitest::Test
 
     @computer.fire(@human.board)
 
-    revealed_board_1 = "  1 2 3 4 \n" +
-                      "A H M . . \n" +
-                      "B H . . . \n" +
-                      "C . S . . \n" +
-                      "D . S . . \n"
+    revealed_board_1 = "  1 2 3 4" +
+                      "A H M . ." +
+                      "B H . . ." +
+                      "C . S . ." +
+                      "D . S . ."
     assert_equal revealed_board_1, @human.board.render(true)
   end
 
