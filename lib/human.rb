@@ -51,7 +51,7 @@ class Human
   end
 
   def select_cell_to_fire
-    p "Select a cell to fire at:"
+    p "Enter the coordinate for your shot:"
     coordinate = gets.chomp
     coordinate
   end
@@ -63,7 +63,7 @@ class Human
       computer_board.cells[user_input].fire_upon
       @coordinates_guessed << user_input
     else
-      p "This is an invalid coordinate. Select another one to fire at."
+      p "Please enter a valid coordinate:"
       fire(computer_board)
       # calling a method within itself = recursive
     end

@@ -31,7 +31,11 @@ class HumanTest < Minitest::Test
   def test_it_has_a_board_and_two_ships
     assert_instance_of Board, @human.board
     assert_equal @cruiser, @human.cruiser
+    # same comment ship assert_equal assertions in computer_test.rb
+    assert_instance_of Ship, @human.cruiser
     assert_equal @submarine, @human.submarine
+    # same as above
+    assert_instance_of Ship, @human.submarine
   end
 
   def test_it_starts_with_no_coordinates_guessed

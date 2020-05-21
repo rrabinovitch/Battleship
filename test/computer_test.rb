@@ -31,7 +31,11 @@ class ComputerTest < Minitest::Test
   def test_it_has_a_board_and_two_ships
     assert_instance_of Board, @computer.board
     assert_equal @cruiser, @computer.cruiser
+    # this test might not be useful since these values are literally set to equal each other in the setup method
+    assert_instance_of Ship, @computer.cruiser
     assert_equal @submarine, @computer.submarine
+    # same comment as above about submarine
+    assert_instance_of Ship, @computer.submarine
   end
 
   def test_it_starts_with_no_coordinates_guessed
