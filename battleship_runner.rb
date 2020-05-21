@@ -8,52 +8,16 @@ require './lib/game'
 game = Game.new
 game.display_menu
 input = game.get_user_input
+# add self correction for lower and upper case p's and q's
 if input == "p"
   game.setup
   game.play
 elsif input == "q"
-  p "Thanks for playing!"
+  puts "Thanks for playing!"
 else
-  p "Invalid input"
+  puts "Invalid input"
   input = game.get_user_input
+  # quits after receiving second input attempt
+  # try defining all the above in a method within Game
+  # and calling the method in here
 end
-
-# "=============COMPUTER BOARD============= \n
-# 1 2 3 4 \n
-# A . . . . \n
-# B . . . . \n
-# C . . . . \n
-# D . . . . \n \n
-# ==============YOUR BOARD============== \n
-# 1 2 3 4 \n
-# A S S S . \n
-# B . . . . \n
-# C . S . . \n
-# D . S . . \n"
-# "Here are each of our boards: \n
-# =============COMPUTER BOARD============= \n
-# 1 2 3 4 \n
-# A . . . . \n
-# B . . . . \n
-# C . . . . \n
-# D . . . . \n \n
-# ==============YOUR BOARD============== \n
-# 1 2 3 4 \n
-# A S S S . \n
-# B . . . . \n
-# C . S . . \n
-# D . S . . \n \n
-# At the start of each turn, you'll see my board showing the cells at which you've already fired and your board showing your own ships and the cells at which I've already fired. \n
-# Let's start playing! You'll fire first."
-# "=============COMPUTER BOARD============= \n
-# 1 2 3 4 \n
-# A . . . . \n
-# B . . . . \n
-# C . . . . \n
-# D . . . . \n \n
-# ==============YOUR BOARD============== \n
-# 1 2 3 4 \n
-# A S S S . \n
-# B . . . . \n
-# C . S . . \n
-# D . S . . \n"
