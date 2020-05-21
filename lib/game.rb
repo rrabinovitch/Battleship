@@ -1,5 +1,3 @@
-# removed computer_select_coordinates
-# computer_place_ships
 class Game
   attr_reader :human,
               :computer
@@ -23,17 +21,17 @@ class Game
     @computer.place_submarine
     p "I have laid out my ships on the grid. \n" +
       "You now need to lay out your two ships." +
-      "The cruiser is three units long and the submarine is two units long."
-      "#{@human.board.render(true)}"
+      "The cruiser is three units long and the submarine is two units long. \n" +
+      "Here is what your board looks like:"
+    p "#{@human.board.render}"
     @human.place_cruiser
-    @human.board.render(true)
+    p "#{@human.board.render(true)}"
     @human.place_submarine
     # @human.board.render(true)
-    p "Here are each of our boards: \n" +
-      "#{display_boards} \n" +
+    p "Let's start playing! \n" +
       "At the start of each turn, you'll see my board showing the cells at which you've already fired " +
       "and your board showing your own ships and the cells at which I've already fired. \n" +
-      "Let's start playing! You'll fire first."
+      "You'll fire first."
   end
 
   def play
