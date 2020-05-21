@@ -1,8 +1,7 @@
 class Board
-  attr_reader :ships,
-              :cells
+  attr_reader :cells
+
   def initialize
-    @ships = []
     @cells = make_cells
   end
 
@@ -51,7 +50,7 @@ class Board
   def coordinates_in_same_column?(coordinates) # check if all coordinates' numbers are same
     columns = coordinate_columns(coordinates)
     columns.all? do |column|
-      column[0] == column
+      columns[0] == column
     end
   end
 
@@ -100,7 +99,9 @@ class Board
     if valid_placement?(ship, coordinates)
       coordinates.each do |coordinate|
         if @cells[coordinate].empty?
-        @cells[coordinate].place_ship(ship)
+          @cells[coordinate].place_ship(ship)
+        else
+          "invalid placement"
         end
       end
     end
@@ -119,6 +120,24 @@ class Board
       "B #{@cells["B1"].render(true)} #{@cells["B2"].render(true)} #{@cells["B3"].render(true)} #{@cells["B4"].render(true)} \n" +
       "C #{@cells["C1"].render(true)} #{@cells["C2"].render(true)} #{@cells["C3"].render(true)} #{@cells["C4"].render(true)} \n" +
       "D #{@cells["D1"].render(true)} #{@cells["D2"].render(true)} #{@cells["D3"].render(true)} #{@cells["D4"].render(true)} \n"
+    end
+  end
+
+  # consider moving this functionality to computer and human classes
+  def remaining_cells
+    @cells.reject do |_coordinate, cell|
+      cell.fired_upon?
+    end
+  end
+
+  def all_ships_sunk?
+    # try w each_key?
+    cells_with_ships = @cells.select do |_coordinate, cell|
+      cell.ship
+    end
+
+    cells_with_ships.all? do |_coordinate, cell|
+      cell.ship.sunk?
     end
   end
 end

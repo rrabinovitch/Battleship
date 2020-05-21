@@ -97,13 +97,50 @@ class TurnTest < Minitest::Test
   end
 
   def test_computer_can_fire_at_human_board
+<<<<<<< Updated upstream
+<<<<<<< HEAD
     @turn.computer_fires_at_user("A1")
     @turn.computer_fires_at_user("B1")
+=======
+    @turn.computer_fires_at_human("A1")
+    @turn.computer_fires_at_human("B1")
+>>>>>>> f2fb39b881a676de51c65d9481748f03f855f709
+=======
+    @turn.computer_fires_at_user("A1")
+    @turn.computer_fires_at_user("B1")
+>>>>>>> Stashed changes
 
     assert_equal false, @turn.human_board.remaining_cells.include?(@human_board.cells["A1"])
     assert_equal false, @turn.human_board.remaining_cells.include?(@human_board.cells["B1"])
 
     random_cell = @turn.computer_select_cell
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+    @turn.computer_fires_at_user(random_cell)
+=======
+    @turn.computer_fires_at_human(random_cell)
+>>>>>>> f2fb39b881a676de51c65d9481748f03f855f709
+
+    assert_equal 13, @turn.human_board.remaining_cells.count
+  end
+
+  def test_it_can_display_results
+<<<<<<< HEAD
+    skip
+=======
+>>>>>>> f2fb39b881a676de51c65d9481748f03f855f709
+    @turn.human_fires_at_computer("B1")
+    @turn.human_fires_at_computer("A4")
+    @turn.human_fires_at_computer("D1")
+    @turn.human_fires_at_computer("D2")
+
+<<<<<<< HEAD
+    @turn.computer_fires_at_user("A1")
+    @turn.computer_fires_at_user("B3")
+    @turn.computer_fires_at_user("C1")
+    @turn.computer_fires_at_user("C2")
+
+=======
     @turn.computer_fires_at_user(random_cell)
 
     assert_equal 13, @turn.human_board.remaining_cells.count
@@ -121,6 +158,7 @@ class TurnTest < Minitest::Test
     @turn.computer_fires_at_user("C1")
     @turn.computer_fires_at_user("C2")
 
+>>>>>>> Stashed changes
     display = "=============COMPUTER BOARD============= \n" +
               "  1 2 3 4 \n" +
               "A . . . M \n" +
@@ -133,6 +171,7 @@ class TurnTest < Minitest::Test
               "B . . M . \n" +
               "C X X . . \n" +
               "D . . . . \n"
+<<<<<<< Updated upstream
 
     assert_equal display, @turn.display_turn_results
   end
@@ -157,6 +196,74 @@ class TurnTest < Minitest::Test
 
     assert_equal true, @turn.winner
     assert_equal false, @turn.winner
+=======
+    @turn.computer_fires_at_human("A1")
+    @turn.computer_fires_at_human("B3")
+    @turn.computer_fires_at_human("C1")
+    @turn.computer_fires_at_human("C2")
+
+    display = "=============COMPUTER BOARD============= \n" +
+              "  1 2 3 4 \n" +
+              "A . . . M \n" +
+              "B H . . . \n" +
+              "C . . . . \n" +
+              "D X X . . \n" +
+              "==============PLAYER BOARD============== \n" +
+              "  1 2 3 4 \n" +
+              "A H . . . \n" +
+              "B . . M . \n" +
+              "C X X . . \n" +
+              "D . . . . \n"
+    assert_equal display, @turn.display_turn_results
+  end
+
+  def test_it_can_identify_if_either_player_has_lost_after_last_fire
+    @turn.human_fires_at_computer("B1")
+    @turn.computer_fires_at_human("A1")
+
+    @turn.human_fires_at_computer("A4")
+    @turn.computer_fires_at_human("A2")
+
+    @turn.human_fires_at_computer("D1")
+    @turn.computer_fires_at_human("A3")
+
+    assert_equal false, @turn.human_lost?
+    assert_equal false, @turn.computer_lost?
+
+    @turn.human_fires_at_computer("D2")
+    @turn.computer_fires_at_human("C1")
+    @turn.human_fires_at_computer("D3")
+    @turn.computer_fires_at_human("C2")
+
+    assert_equal true, @turn.human_lost?
+    assert_equal false, @turn.computer_lost?
+>>>>>>> f2fb39b881a676de51c65d9481748f03f855f709
+=======
+
+    assert_equal display, @turn.display_turn_results
+  end
+
+  def test_it_can_identify_winner
+    @turn.human_fires_at_computer("B1")
+    @turn.computer_fires_at_user("A1")
+
+    @turn.human_fires_at_computer("A4")
+    @turn.computer_fires_at_user("A2")
+
+    @turn.human_fires_at_computer("D1")
+    @turn.computer_fires_at_user("A3")
+
+    assert_equal false, @turn.winner
+    assert_equal false, @turn.winner
+
+    @turn.human_fires_at_computer("D2")
+    @turn.computer_fires_at_user("C1")
+    @turn.human_fires_at_computer("D3")
+    @turn.computer_fires_at_user("C2")
+
+    assert_equal true, @turn.winner
+    assert_equal false, @turn.winner
+>>>>>>> Stashed changes
   end
 end
 
