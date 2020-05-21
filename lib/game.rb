@@ -38,6 +38,7 @@ class Game
         "and your board showing your own ships and the cells at which I've already fired. \n" +
         "You'll fire first."
     system 'clear'
+    play
   end
 
   def play
@@ -68,6 +69,9 @@ class Game
 
   def report_turn_results
     # to be referenced in start method
+    # report results
+    # *** #  => your shot on #{selected coordinate} was a #{hit, miss, sink?}
+    # *** #  => my shot on #{selected coordinate} was a #{hit, miss, sink?}
   end
 
   def report_winner
@@ -80,7 +84,3 @@ class Game
     end
   end
 end
-
-# report results
-# *** #  => your shot on #{selected coordinate} was a #{hit, miss, sink?}
-# *** #  => my shot on #{selected coordinate} was a #{hit, miss, sink?}

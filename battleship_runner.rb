@@ -13,13 +13,8 @@ if input == "p"
   sleep(2.5)
   system 'clear'
   game.setup
-  game.play
 elsif input == "q"
   puts "Thanks for playing!"
 else
-  puts "Invalid input"
-  input = game.get_user_input
-  # quits after receiving second input attempt
-  # try defining all the above in a method within Game
-  # and calling the method in here
+  puts "Invalid input. Goodbye!"
 end

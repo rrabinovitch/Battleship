@@ -44,7 +44,6 @@ class Human
     print "=> "
     coord_2 = gets.chomp
     submarine_coordinates << coord_2.upcase
-    # can try using a times do loop instead
 
     if @board.valid_placement?(@submarine, submarine_coordinates)
       @board.place(@submarine, submarine_coordinates)
@@ -70,7 +69,6 @@ class Human
     else
       puts "\nThat was an invalid coodinate selection. Please choose another one."
       fire(computer_board)
-      # calling a method within itself = recursive
     end
     puts "..."
     sleep(2)
