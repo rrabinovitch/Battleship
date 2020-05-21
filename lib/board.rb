@@ -50,7 +50,7 @@ class Board
   def coordinates_in_same_column?(coordinates) # check if all coordinates' numbers are same
     columns = coordinate_columns(coordinates)
     columns.all? do |column|
-      column[0] == column
+      columns[0] == column
     end
   end
 
@@ -96,7 +96,6 @@ class Board
   end
 
   def place(ship, coordinates)
-    # require "pry"; binding.pry
     if valid_placement?(ship, coordinates)
       coordinates.each do |coordinate|
         if @cells[coordinate].empty?

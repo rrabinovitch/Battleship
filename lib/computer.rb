@@ -22,20 +22,20 @@ class Computer
     coordinates
   end
 
-  # def place_cruiser
-  #   cruiser_coordinates = select_placement_coordinates(@cruiser)
-  #   @board.place(@cruiser, cruiser_coordinates)
-  # end
-  #
-  # def place_submarine
-  #   submarine_coordinates = select_placement_coordinates(@submarine)
-  #   @board.place(@submarine, submarine_coordinates)
-  # end
-
-  def place_ship(ship)
-    coordinates = select_placement_coordinates(ship)
-    @board.place(ship, coordinates)
+  def place_cruiser
+    cruiser_coordinates = select_placement_coordinates(@cruiser)
+    @board.place(@cruiser, cruiser_coordinates)
   end
+
+  def place_submarine
+    submarine_coordinates = select_placement_coordinates(@submarine)
+    @board.place(@submarine, submarine_coordinates)
+  end
+
+  # def place_ship(ship)
+  #   coordinates = select_placement_coordinates(ship)
+  #   @board.place(ship, coordinates)
+  # end
 
   def fire(human_board)
     selection = @board.cells.keys.sample

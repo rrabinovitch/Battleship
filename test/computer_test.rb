@@ -17,6 +17,10 @@ class ComputerTest < Minitest::Test
     @human = Human.new
   end
 
+  def computer_setup
+
+  end
+
   def test_it_exists
     skip
     assert_instance_of Computer, @computer
@@ -46,7 +50,6 @@ class ComputerTest < Minitest::Test
   end
 
   def test_it_can_place_cruiser
-    skip
     @computer.stubs(:select_placement_coordinates).returns(["A1", "A2", "A3"])
     @computer.place_cruiser
 
@@ -61,8 +64,7 @@ class ComputerTest < Minitest::Test
 
   def test_it_can_place_submarine # something with ship placement not working
     @computer.stubs(:select_placement_coordinates).returns(["C2", "D2"])
-    @computer.place_ship(@submarine)
-    require "pry"; binding.pry
+    @computer.place_submarine
     revealed_board = "  1 2 3 4 \n" +
                     "A . . . . \n" +
                     "B . . . . \n" +
@@ -71,5 +73,13 @@ class ComputerTest < Minitest::Test
     assert_equal revealed_board, @computer.board.render(true)
   end
 
+  def test_it_can_place_both_ships
 
+  end
+
+  def test_it_can_fire_at_human_board
+    skip
+    require "pry"; binding.pry
+    # @computer.fire(@human.board)
+  end
 end
