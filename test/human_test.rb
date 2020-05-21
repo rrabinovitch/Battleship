@@ -50,11 +50,11 @@ class HumanTest < Minitest::Test
     @human.place_cruiser
     # mocks not working when calling .place_cruiser
 
-    revealed_board = "  1 2 3 4 \n" +
-                    "A S . . . \n" +
-                    "B S . . . \n" +
-                    "C S . . . \n" +
-                    "D . . . . \n"
+    revealed_board = "  1 2 3 4\n" +
+                    "A S . . .\n" +
+                    "B S . . .\n" +
+                    "C S . . .\n" +
+                    "D . . . ."
 
     assert_equal revealed_board, @human.board.render(true)
 

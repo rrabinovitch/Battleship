@@ -154,11 +154,11 @@ class BoardTest < Minitest::Test
   end
 
   def test_it_can_render_default
-    default_board = "  1 2 3 4 \n" +
-                    "A . . . . \n" +
-                    "B . . . . \n" +
-                    "C . . . . \n" +
-                    "D . . . . \n"
+    default_board = "  1 2 3 4\n" +
+                    "A . . . .\n" +
+                    "B . . . .\n" +
+                    "C . . . .\n" +
+                    "D . . . ."
 
     assert_equal default_board, @board.render
   end
@@ -166,11 +166,11 @@ class BoardTest < Minitest::Test
   def test_it_can_render_reveal_ship_without_being_hit
     @board.place(@cruiser, ["A1", "A2", "A3"])
 
-    revealed_board = "  1 2 3 4 \n" +
-                    "A S S S . \n" +
-                    "B . . . . \n" +
-                    "C . . . . \n" +
-                    "D . . . . \n"
+    revealed_board = "  1 2 3 4\n" +
+                    "A S S S .\n" +
+                    "B . . . .\n" +
+                    "C . . . .\n" +
+                    "D . . . ."
 
     assert_equal revealed_board, @board.render(true)
   end
@@ -181,11 +181,11 @@ class BoardTest < Minitest::Test
     @board.cells["A1"].fire_upon
     @board.cells["B1"].fire_upon
 
-    fired_at_board = "  1 2 3 4 \n" +
-                    "A H . . . \n" +
-                    "B M . . . \n" +
-                    "C . . . . \n" +
-                    "D . . . . \n"
+    fired_at_board = "  1 2 3 4\n" +
+                    "A H . . .\n" +
+                    "B M . . .\n" +
+                    "C . . . .\n" +
+                    "D . . . ."
 
     assert_equal fired_at_board, @board.render
   end
@@ -197,11 +197,11 @@ class BoardTest < Minitest::Test
     @board.cells["A2"].fire_upon
     @board.cells["A3"].fire_upon
 
-    sunken_ship_board =  "  1 2 3 4 \n" +
-                        "A X X X . \n" +
-                        "B M . . . \n" +
-                        "C . . . . \n" +
-                        "D . . . . \n"
+    sunken_ship_board =  "  1 2 3 4\n" +
+                        "A X X X .\n" +
+                        "B M . . .\n" +
+                        "C . . . .\n" +
+                        "D . . . ."
 
     assert_equal sunken_ship_board, @board.render
   end

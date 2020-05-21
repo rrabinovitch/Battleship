@@ -7,9 +7,11 @@ require './lib/game'
 
 game = Game.new
 game.display_menu
-input = game.get_user_input
-# add self correction for lower and upper case p's and q's
+input = game.get_user_input.downcase
 if input == "p"
+  puts "..."
+  sleep(2.5)
+  system 'clear'
   game.setup
   game.play
 elsif input == "q"
