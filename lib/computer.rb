@@ -33,22 +33,24 @@ class Computer
   end
 
   def fire(human_board)
-    puts "..."
     sleep(2)
     selection = @board.cells.keys.sample
     if !@coordinates_guessed.include?(selection)
       human_board.cells[selection].fire_upon
       @coordinates_guessed << selection
-      sleep(1)
-      if human_board.cells[selection].render == "H"
-        puts "Your shot on #{selection} was a hit."
-      elsif human_board.cells[selection].render == "M"
-        puts "Your shot on #{selection} was a miss."
-      elsif human_board.cells[selection].render == "X"
-        puts "Your shot on #{selection} sunk a ship."
-      end
+      turn_results(selection)
     else
-      select_cell_to_fire(human_board)
+      fire(human_board)
+    end
+  end
+
+  def turn_results(selection)
+    if human_board.cells[selection].render == "H"
+      puts "Your shot on #{selection} was a hit."
+    elsif human_board.cells[selection].render == "M"
+      puts "Your shot on #{selection} was a miss."
+    elsif human_board.cells[selection].render == "X"
+      puts "Your shot on #{selection} sunk a ship."
     end
   end
 
