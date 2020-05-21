@@ -47,7 +47,7 @@ class Computer
   end
 
   def lost?
-    if all_ships_sunk?
+    if @board.all_ships_sunk?
       true
     else
       false
