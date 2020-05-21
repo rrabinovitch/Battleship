@@ -21,7 +21,6 @@ class GameTest < Minitest::Test
     @computer_board = @game.computer.board
     @computer_cruiser = @computer.cruiser
     @computer_submarine = @computer.submarine
-    require "pry"; binding.pry
   end
 
   def simulate_human_ship_placement
@@ -97,6 +96,9 @@ class GameTest < Minitest::Test
 
   def test_it_can_report_computer_winner
     # testing game result reporting when computer has sunk all human's ships
+    #@human.lost? == true
+    #assert_equal "I won!", @game.report_winner
+    #outputs "You won!" at the top of terminal by seed
   end
 
   def test_it_can_report_human_winner

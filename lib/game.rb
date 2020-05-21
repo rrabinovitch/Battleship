@@ -49,7 +49,7 @@ class Game
         "and your board showing your own ships and the cells at which I've already fired. \n" +
         "You'll fire first."
     puts "..."
-    sleep(4)
+    sleep(7)
     play
   end
 

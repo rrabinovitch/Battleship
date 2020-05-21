@@ -46,6 +46,10 @@ class ComputerTest < Minitest::Test
     assert_equal 3, @computer.select_placement_coordinates(@cruiser).count
     assert_equal 2, @computer.select_placement_coordinates(@submarine).count
 
+
+    #@computer.expects(:random_coord).returns(["D2", "D3", "D4"])
+    #assert_equal ["D2", "D3", "D4"], @computer.select_placement_coordinates(@cruiser)
+
     # assert true that the coordinates that were
     # randomly selected for each ship pass through
     # the board.valid_placement?(ship, coordinates) method
@@ -100,8 +104,8 @@ class ComputerTest < Minitest::Test
 
   def test_if_computer_has_lost
     skip #INCOMPLETE TEST
-    assert_equal false, @computer.lost?
 
+    assert_equal false, @computer.lost?
     assert_equal true, @computer.lost?
   end
 end

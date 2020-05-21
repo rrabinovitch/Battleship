@@ -132,6 +132,14 @@ class BoardTest < Minitest::Test
     assert_equal @cruiser, cell_2.ship
     assert_equal @cruiser, cell_3.ship
     assert cell_1.ship == cell_2.ship
+
+    @board.place(@submarine, ["A4", "B4"])
+    cell_1 = @board.cells["A4"]
+    cell_2 = @board.cells["B4"]
+
+    assert_equal @submarine, cell_1.ship
+    assert_equal @submarine, cell_2.ship
+    assert cell_1.ship == cell_2.ship
   end
 
   def test_if_all_cells_are_empty
