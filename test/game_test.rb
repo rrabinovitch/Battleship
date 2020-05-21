@@ -21,6 +21,7 @@ class GameTest < Minitest::Test
     @computer_board = @game.computer.board
     @computer_cruiser = @computer.cruiser
     @computer_submarine = @computer.submarine
+    require "pry"; binding.pry
   end
 
   def simulate_human_ship_placement

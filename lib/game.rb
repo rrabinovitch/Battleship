@@ -45,7 +45,6 @@ class Game
       display_boards
       @human.fire(@computer.board)
       @computer.fire(@human.board)
-      # report_turn_results
       system 'clear'
     end
     report_winner
@@ -64,13 +63,6 @@ class Game
     "#{@computer.board.render}\n" +
     "==============YOUR BOARD==============\n" +
     "#{@human.board.render(true)}"
-  end
-
-  def report_turn_results
-    # to be referenced in start method
-    # report results
-    # *** #  => your shot on #{selected coordinate} was a #{hit, miss, sink?}
-    # *** #  => my shot on #{selected coordinate} was a #{hit, miss, sink?}
   end
 
   def report_winner
